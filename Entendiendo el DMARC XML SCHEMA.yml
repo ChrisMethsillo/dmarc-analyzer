@@ -1,0 +1,45 @@
+Entendiendo el DMARC XML SCHEMA
+
+report metadata:
+    - org_name: Nombre de la organizacion
+    - email: Correo desde donde se envia el reporte
+    - report_id: Id unico del reporte
+    - daterange: rango de tiempo (UTC) desde cuando se originan los reportes
+        - begin: inicio del periodo
+        - end: final del periodo
+
+policy_published: Politicas DMARC aplicadas a los siguientes reportes
+    - domain: Dominio desde donde se encontro el registro dmarc
+    - adkim: DKIM alignment mode
+    - aspf: SPF alignment mode
+    - p: Politicas a aplicar para los mensajes del dominio
+    - sp: Politicas a aplicar para los mensajes de subdominios
+    - pct: Porcentaje de mensajes donde las politicas aplican
+    - fo: No entendi muy bien, algo de error
+
+record: Este elemento contiene todos los resultados de autenticación que
+        fueron evaluados por el sistema receptor para el conjunto dado de
+        mensajes
+    - row: Un unico registro de evaluación
+        - source_ip: Ip del registro
+        - count: numero de mensajes
+        - policy_evaluated: Politicas DMARC aplicadas al mensaje
+            - disposition: Resultado de las acciones de política especificadas por p y sp en el
+                            Registro DMARC.
+            - dkim: same
+            - spf: same
+
+    - identifiers: 
+        - envelope_to: dominio hacia donde se envia
+        - envelope_from: dominio desde donde
+        - header_from: el dominio de la dirección de correo electrónico que aparece en el campo "From" del mensaje
+    
+    - auth_result: Este elemento contiene resultados DKIM y SPF, no interpretados con respecto a DMARC
+        - dkim: Resultado DKIM
+            - domain: parametro d= en la firma dkim
+            - selector: parametro s= en la firma
+            - result: Resultado de la verificacion DKIM
+        - spf: Resultado de spf
+            - domain: Dominio checkeado
+            - scope: El alcance del dominio verificado.
+            - result: El resultado de la verificación SPF

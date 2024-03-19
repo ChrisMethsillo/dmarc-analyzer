@@ -1,0 +1,4 @@
+.venv
+.dmarcfiles
+.dmarc
+*__pycache__
