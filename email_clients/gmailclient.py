@@ -27,7 +27,7 @@ class GmailClient:
         self.connected = False
         self.running = False
 
-    def authenticate(self):
+    def __authenticate(self):
         """
         Authenticate with the Gmail API using OAuth 2.0.
         """
@@ -50,12 +50,12 @@ class GmailClient:
             if credentials.expired and credentials.refresh_token:
                 credentials.refresh(Request())
             else:
-                self.authenticate()
+                self.__authenticate()
                 credentials = Credentials.from_authorized_user_file(self.token_path)
             self.service = build('gmail', 'v1', credentials=credentials)
             self.connected = True
         else:
-            self.authenticate()
+            self.__authenticate()
             return self.__get_service()
         
     def connect(self):

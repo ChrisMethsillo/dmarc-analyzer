@@ -2,3 +2,5 @@
 .dmarcfiles
 .dmarc
 *__pycache__
+.secrets
+.env

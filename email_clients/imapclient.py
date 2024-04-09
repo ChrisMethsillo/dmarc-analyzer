@@ -1,9 +1,10 @@
 from imap_tools import MailBox, A
 import time
 import signal
-from email_base import AbstractIMAPClient
+from email_clients.email_base import AbstractEmailClient
+import ssl
 
-class IMAPClient(AbstractIMAPClient):
+class IMAPClient(AbstractEmailClient):
     """
     IMAPClient class to connect to an IMAP server and forward attachments of a specific file type.
     """
@@ -31,12 +32,16 @@ class IMAPClient(AbstractIMAPClient):
         """
         Connect to the IMAP server.
         """
-        try:
-            self.mailbox = MailBox(self.host, self.port)
-            self.mailbox.login(self.username, self.password, self.ssl)
-            self.connected = True
-        except Exception as e:
-            print("Error connecting:", e)
+        # try:
+        ctx = ssl.create_default_context()
+        ctx.set_ciphers('DEFAULT')
+        self.mailbox = MailBox(self.host, self.port, ssl_context=ctx)
+        
+        self.mailbox.login(self.username, self.password, self.ssl)
+        self.connected = True
+        # except Exception as e:
+        #     print("Error connecting:", e)
+            
 
     def forward_attachments(self, file_type, folder='INBOX', search_criteria=None, save_directory="."):
         """
@@ -76,6 +81,8 @@ class IMAPClient(AbstractIMAPClient):
             self.mailbox.logout()
         except Exception as e:
             print("Error disconnecting:", e)
+            sys.exit(1)
+            
 
     def stop(self, signum, frame):
         """
@@ -85,8 +92,12 @@ class IMAPClient(AbstractIMAPClient):
             signum (int): The signal number.
             frame (frame): The current stack frame.
         """
-        self.disconnect()
-        self.running = False
+        try:
+            self.running = False
+            self.disconnect()
+        except Exception as e:
+            print("Error stopping:", e)
+            sys.exit(1)
 
     def watch(self, file_type, callback = None, folder='INBOX', search_criteria=None, save_directory=".", timeout_seconds=300):
         """

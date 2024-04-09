@@ -1,4 +1,4 @@
-from xml_parser import dmarc_xml_to_dict, dict_to_json
+from utils.xml_parser import dmarc_xml_to_dict, dict_to_json
 import os
 import shutil
 
@@ -37,7 +37,5 @@ def parse_dmarc_reports_dir(directory: str, move_files=False, parsed_dir:str=Non
     return report_list
 
 
-if __name__ == "__main__":
-    directory = ".dmarc"
-    print(parse_dmarc_reports_dir(directory, move_files=True))
+
     
