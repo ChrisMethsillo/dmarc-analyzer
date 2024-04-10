@@ -1,14 +1,12 @@
 #import dotenv
 import os
 import sys
-import time
-import signal
 from dotenv import load_dotenv
 from email_clients.imapclient import IMAPClient
 from email_clients.gmailclient import GmailClient
 from utils.bulk_dmarc_reports import parse_dmarc_reports_dir
 from utils.extract_gz import multiple_extract_gz
-import ssl
+
 
 client = None
 attachment_dir = '.'
@@ -26,7 +24,7 @@ def parse_dmarc_files():
     if not extracted_files:
         return []
     report_list = parse_dmarc_reports_dir(extracted_dir, move_files=True, parsed_dir=parsed_dir)
-    return report_list
+    print(report_list)
     
 def watch_emails():
     client.watch(file_type='xml.gz', callback=parse_dmarc_files, save_directory=attachment_dir, timeout_seconds=300)
@@ -43,7 +41,8 @@ if __name__ == "__main__":
         imap_port = int(os.getenv("IMAP_PORT"))
         imap_username = os.getenv("IMAP_USERNAME")
         imap_password = os.getenv("IMAP_PASSWORD")
-        client = IMAPClient(imap_server, imap_port, True, imap_username, imap_password)
+        imap_mode = os.getenv("IMAP_MODE")
+        client = IMAPClient(imap_server, imap_port, imap_mode, imap_username, imap_password)
     
     elif client_type == "gmail":
         client = GmailClient()

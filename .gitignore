@@ -1,6 +1,7 @@
 .venv
 .dmarcfiles
 .dmarc
+save_files
 *__pycache__
 .secrets
 .env
