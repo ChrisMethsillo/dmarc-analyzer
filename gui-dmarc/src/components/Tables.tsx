@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react'
+import React from 'react'
 import {
   PaginationState,
   useReactTable,
@@ -7,68 +8,78 @@ import {
   ColumnDef,
   flexRender,
 } from '@tanstack/react-table'
+import { useNavigate } from 'react-router-dom'
 
 type PolicyPublished = {
-  domain: string;
-  adkim: string;
-  aspf: string;
-  p: string;
-  sp: string;
-  pct: number;
-  fo: number;
-};
+  domain: string
+  adkim: string
+  aspf: string
+  p: string
+  sp: string
+  pct: number
+  fo: number
+}
 
 type PolicyEvaluated = {
-  disposition: string;
-  dkim: string | null;
-  spf: string;
-};
+  disposition: string
+  dkim: string | null
+  spf: string
+}
 
 type AuthResults = {
   spf: {
-    domain: string;
-    scope: string;
-    result: string;
-  };
+    domain: string
+    scope: string
+    result: string
+  }
   dkim: {
-    domain: string;
-    selector: string;
-    result: string | null;
-  } | null;
-};
+    domain: string
+    selector: string
+    result: string | null
+  } | null
+}
 
 type RecordRow = {
-  source_ip: string;
-  count: number;
-  policy_evaluated: PolicyEvaluated;
-};
+  source_ip: string
+  count: number
+  policy_evaluated: PolicyEvaluated
+}
 
 type RecordIdentifiers = {
-  envelope_to: string;
-  envelope_from: string;
-  header_from: string;
-};
+  envelope_to: string
+  envelope_from: string
+  header_from: string
+}
 
 type DmarcRecord = {
-  row: RecordRow;
-  identifiers: RecordIdentifiers;
-  auth_results: AuthResults;
-};
+  row: RecordRow
+  identifiers: RecordIdentifiers
+  auth_results: AuthResults
+}
 
 type DmarcReport = {
-  _id: string;
-  version: string;
-  org_name: string;
-  report_id: string;
-  email: string;
-  date_begin: string;
-  date_end: string;
-  policy_published: PolicyPublished | null;
-  record: DmarcRecord[];
-};
+  _id: string
+  version: string
+  org_name: string
+  report_id: string
+  email: string
+  date_begin: string
+  date_end: string
+  policy_published: PolicyPublished | null
+  record: DmarcRecord[]
+}
 
-export function DmarcReportsTable({ reportsData }: { reportsData: DmarcReport[] }) {
-  const rerender = React.useReducer(() => ({}), {})[1];
+export function DmarcReportsTable({
+  reportsData,
+}: {
+  reportsData: DmarcReport[]
+}) {
+  const rerender = React.useReducer(() => ({}), {})[1]
+  const navigate = useNavigate()
+
+  const handleRowClick = (row: DmarcReport) => {
+    navigate(`/report/${row.report_id}`)
+  }
 
   const columns = React.useMemo<ColumnDef<DmarcReport>[]>(
     () => [
@@ -83,70 +94,68 @@ export function DmarcReportsTable({ reportsData }: { reportsData: DmarcReport[] 
       {
         header: 'Date Begin',
         accessorKey: 'date_begin',
-        cell: (row) => {
-          const date = new Date(row.getValue());
-          return date.toLocaleDateString();
+        cell: (row: any) => {
+          const date = new Date(row.getValue() as string)
+          return date.toLocaleDateString()
         },
       },
       {
         header: 'Date End',
         accessorKey: 'date_end',
-        cell: (row) => {
-          const date = new Date(row.getValue());
-          return date.toLocaleDateString();
+        cell: (row: any) => {
+          const date = new Date(row.getValue() as string)
+          return date.toLocaleDateString()
         },
       },
       {
         header: 'Records',
         accessorKey: 'record',
-        cell: (row) => row.getValue().length,
+        cell: (row: any) => (row.getValue() as DmarcRecord[]).length,
       },
       {
         header: 'Auth Results DKIM percentage',
         accessorKey: 'record',
-        cell: (row) => {
-          const records = row.getValue();
+        cell: (row: any) => {
+          const records = row.getValue() as DmarcRecord[]
           const dkimPass = records.filter(
-            (record) => record.auth_results.dkim?.result === 'pass'
-          ).length;
+            (record) => record.auth_results?.dkim?.result === 'pass',
+          ).length
           const dkimFail = records.filter(
-            (record) => record.auth_results.dkim?.result === 'fail'
-          ).length;
-          const total = records.length;
-          return `pass: ${((dkimPass / total) * 100).toFixed(2)}%, fail: ${((dkimFail / total) * 100).toFixed(2)}%`;
+            (record) => record.auth_results?.dkim?.result === 'fail',
+          ).length
+          const total = records.length
+          return `pass: ${((dkimPass / total) * 100).toFixed(2)}%, fail: ${((dkimFail / total) * 100).toFixed(2)}%`
         },
-
       },
       {
         header: 'Auth Results SPF percentage',
         accessorKey: 'record',
-        cell: (row) => {
-          const records = row.getValue();
+        cell: (row: any) => {
+          const records = row.getValue() as DmarcRecord[]
           const spfPass = records.filter(
-            (record) => record.auth_results.spf.result === 'pass'
-          ).length;
+            (record) => record.auth_results?.spf?.result === 'pass',
+          ).length
           const spfFail = records.filter(
-            (record) => record.auth_results.spf.result === 'fail'
-          ).length;
-          const total = records.length;
-          return `pass: ${((spfPass / total) * 100).toFixed(2)}%, fail: ${((spfFail / total) * 100).toFixed(2)}%`;
+            (record) => record.auth_results?.spf?.result === 'fail',
+          ).length
+          const total = records.length
+          return `pass: ${((spfPass / total) * 100).toFixed(2)}%, fail: ${((spfFail / total) * 100).toFixed(2)}%`
         },
-      }
+      },
     ],
-    []
-  );
+    [],
+  )
 
-  const [data, setData] = React.useState<DmarcReport[]>([]);
+  const [data, setData] = React.useState<DmarcReport[]>([])
   const [pagination, setPagination] = React.useState<PaginationState>({
     pageIndex: 0,
     pageSize: 5,
-  });
+  })
 
   useEffect(() => {
-    setData(reportsData);
+    setData(reportsData)
     console.log(table.getRowModel().rows[0])
-  }
-  , [reportsData]);
+  }, [reportsData])
 
   const table = useReactTable({
     data,
@@ -157,10 +166,10 @@ export function DmarcReportsTable({ reportsData }: { reportsData: DmarcReport[] 
     onPaginationChange: setPagination,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-  });
+  })
 
   return (
-    <div className='flex flex-col overflow-x-auto'>
+    <div className="flex flex-col overflow-x-auto">
       <div className="flex flex-col pt-6 overflow-auto">
         <table className="flex-col divide-y divide-gray-200 bg-gray-800 text-white overflow-auto">
           <thead className="flex-grow bg-gray-700 ">
@@ -176,7 +185,7 @@ export function DmarcReportsTable({ reportsData }: { reportsData: DmarcReport[] 
                       <div>
                         {flexRender(
                           header.column.columnDef.header,
-                          header.getContext()
+                          header.getContext(),
                         )}
                       </div>
                     )}
@@ -185,184 +194,183 @@ export function DmarcReportsTable({ reportsData }: { reportsData: DmarcReport[] 
               </tr>
             ))}
           </thead>
-          <tbody className="bg-gray-800 divide-y divide-gray-700">
-            {table.getRowModel().rows.map((row) => (
-              <tr key={row.id}>
+          <tbody className="bg-gray-800 divide-y divide-gray-700 cursor-pointer">
+            {table.getRowModel().rows.map((row: any) => (
+              <tr
+                key={row.id}
+                onClick={() => handleRowClick(row.original)} // Asegúrate de pasar el objeto original
+              >
                 {row.getVisibleCells().map((cell) => (
                   <td
                     key={cell.id}
                     className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-200"
                   >
-                    {flexRender(
-                      cell.column.columnDef.cell,
-                      cell.getContext()
-                    )}
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 ))}
               </tr>
             ))}
           </tbody>
         </table>
-        </div>
-        <div className="h-2" />
-        <div className="flex items-center gap-2 mt-4">
-          <button
-            className="border rounded p-1 text-gray-700 bg-gray-200"
-            onClick={() => table.setPageIndex(0)}
-            disabled={!table.getCanPreviousPage()}
-          >
-            {'<<'}
-          </button>
-          <button
-            className="border rounded p-1 text-gray-700 bg-gray-200"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
-            {'<'}
-          </button>
-          <button
-            className="border rounded p-1 text-gray-700 bg-gray-200"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
-            {'>'}
-          </button>
-          <button
-            className="border rounded p-1 text-gray-700 bg-gray-200"
-            onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-            disabled={!table.getCanNextPage()}
-          >
-            {'>>'}
-          </button>
-          <span className="flex items-center gap-1 text-gray-200">
-            <div>Page</div>
-            <strong>
-              {table.getState().pagination.pageIndex + 1} of{' '}
-              {table.getPageCount()}
-            </strong>
-          </span>
-          <span className="flex items-center gap-1 text-gray-200">
-            | Go to page:
-            <input
-              type="number"
-              defaultValue={table.getState().pagination.pageIndex + 1}
-              onChange={(e) => {
-                const page = e.target.value ? Number(e.target.value) - 1 : 0;
-                table.setPageIndex(page);
-              }}
-              className="border p-1 rounded w-16 text-gray-700"
-            />
-          </span>
-          <select
-            value={table.getState().pagination.pageSize}
+      </div>
+      <div className="h-2" />
+      <div className="flex items-center gap-2 mt-4">
+        <button
+          className="border rounded p-1 text-gray-700 bg-gray-200"
+          onClick={() => table.setPageIndex(0)}
+          disabled={!table.getCanPreviousPage()}
+        >
+          {'<<'}
+        </button>
+        <button
+          className="border rounded p-1 text-gray-700 bg-gray-200"
+          onClick={() => table.previousPage()}
+          disabled={!table.getCanPreviousPage()}
+        >
+          {'<'}
+        </button>
+        <button
+          className="border rounded p-1 text-gray-700 bg-gray-200"
+          onClick={() => table.nextPage()}
+          disabled={!table.getCanNextPage()}
+        >
+          {'>'}
+        </button>
+        <button
+          className="border rounded p-1 text-gray-700 bg-gray-200"
+          onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+          disabled={!table.getCanNextPage()}
+        >
+          {'>>'}
+        </button>
+        <span className="flex items-center gap-1 text-gray-200">
+          <div>Page</div>
+          <strong>
+            {table.getState().pagination.pageIndex + 1} of{' '}
+            {table.getPageCount()}
+          </strong>
+        </span>
+        <span className="flex items-center gap-1 text-gray-200">
+          | Go to page:
+          <input
+            type="number"
+            defaultValue={table.getState().pagination.pageIndex + 1}
             onChange={(e) => {
-              table.setPageSize(Number(e.target.value));
+              const page = e.target.value ? Number(e.target.value) - 1 : 0
+              table.setPageIndex(page)
             }}
-            className="border p-1 rounded text-gray-700 bg-gray-200"
-          >
-            {[5, 10, 15, 30, 40, 50].map((pageSize) => (
-              <option key={pageSize} value={pageSize}>
-                Show {pageSize}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="text-gray-200 mt-2">
-          {table.getRowModel().rows.length} Rows
-        </div>
-
+            className="border p-1 rounded w-16 text-gray-700"
+          />
+        </span>
+        <select
+          value={table.getState().pagination.pageSize}
+          onChange={(e) => {
+            table.setPageSize(Number(e.target.value))
+          }}
+          className="border p-1 rounded text-gray-700 bg-gray-200"
+        >
+          {[5, 10, 15, 30, 40, 50].map((pageSize) => (
+            <option key={pageSize} value={pageSize}>
+              Show {pageSize}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="text-gray-200 mt-2">
+        {table.getRowModel().rows.length} Rows
+      </div>
     </div>
-  );
+  )
 }
-   
+
 export function RecordsTable({ recordsData }: { recordsData: DmarcRecord[] }) {
-  const rerender = React.useReducer(() => ({}), {})[1];
+  const rerender = React.useReducer(() => ({}), {})[1]
 
   const columns = React.useMemo<ColumnDef<DmarcRecord>[]>(
     () => [
       {
         header: 'Source IP',
         accessorKey: 'row',
-        cell: (row) => row.getValue().source_ip,
+        cell: (row: any) => row.getValue().source_ip,
       },
       {
         header: 'Count',
         accessorKey: 'row',
-        cell: (row) => row.getValue().count,
+        cell: (row: any) => row.getValue().count,
       },
       {
         header: 'Disposition',
         accessorKey: 'row',
-        cell: (row) => row.getValue().policy_evaluated?.disposition,
+        cell: (row: any) => row.getValue().policy_evaluated?.disposition,
       },
       {
         header: 'DKIM',
         accessorKey: 'row',
-        cell: (row) => row.getValue().policy_evaluated?.dkim,
+        cell: (row: any) => row.getValue().policy_evaluated?.dkim,
       },
       {
         header: 'SPF',
         accessorKey: 'row',
-        cell: (row) => row.getValue().policy_evaluated?.spf,
+        cell: (row: any) => row.getValue().policy_evaluated?.spf,
       },
       {
         header: 'Envelope To',
         accessorKey: 'identifiers',
-        cell: (row) => row.getValue().envelope_to,
+        cell: (row: any) => row.getValue().envelope_to,
       },
       {
         header: 'Envelope From',
         accessorKey: 'identifiers',
-        cell: (row) => row.getValue().envelope_from,
+        cell: (row: any) => row.getValue().envelope_from,
       },
       {
         header: 'Header From',
         accessorKey: 'identifiers',
-        cell: (row) => row.getValue().header_from,
+        cell: (row: any) => row.getValue().header_from,
       },
       {
         header: 'SPF Domain',
         accessorKey: 'auth_results',
-        cell: (row) => row.getValue().spf.domain,
+        cell: (row: any) => row.getValue().spf.domain,
       },
       {
         header: 'SPF Scope',
         accessorKey: 'auth_results',
-        cell: (row) => row.getValue().spf?.scope,
+        cell: (row: any) => row.getValue().spf?.scope,
       },
       {
         header: 'SPF Result',
         accessorKey: 'auth_results',
-        cell: (row) => row.getValue().spf?.result,
+        cell: (row: any) => row.getValue().spf?.result,
       },
       {
         header: 'DKIM Domain',
         accessorKey: 'auth_results',
-        cell: (row) => row.getValue().dkim?.domain,
+        cell: (row: any) => row.getValue().dkim?.domain,
       },
       {
         header: 'DKIM Selector',
         accessorKey: 'auth_results',
-        cell: (row) => row.getValue().dkim?.selector,
+        cell: (row: any) => row.getValue().dkim?.selector,
       },
       {
         header: 'DKIM Result',
         accessorKey: 'auth_results',
-        cell: (row) => row.getValue().dkim?.result,
+        cell: (row: any) => row.getValue().dkim?.result,
       },
     ],
-    []
-  );
+    [],
+  )
 
-  const [data, setData] = React.useState<DmarcRecord[]>([]);
+  const [data, setData] = React.useState<DmarcRecord[]>([])
   const [pagination, setPagination] = React.useState<PaginationState>({
     pageIndex: 0,
     pageSize: 5,
-  });
+  })
 
   useEffect(() => {
-    setData(recordsData);
-  }, [recordsData]);
+    setData(recordsData)
+  }, [recordsData])
 
   const table = useReactTable({
     data,
@@ -373,11 +381,11 @@ export function RecordsTable({ recordsData }: { recordsData: DmarcRecord[] }) {
     onPaginationChange: setPagination,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-  });
+  })
 
   return (
-    <div className='flex flex-col overflow-x-auto'>
-      <div className="rounded-xl shadow-xl flex flex-col overflow-auto">
+    <div className="flex flex-col overflow-x-auto">
+      <div className="rounded-xl shadow-xl pb-3 flex flex-col overflow-auto">
         <table className="flex-col divide-y divide-gray-200 bg-gray-800 text-white overflow-auto">
           <thead className="flex-grow bg-gray-700 ">
             {table.getHeaderGroups().map((headerGroup) => (
@@ -392,7 +400,7 @@ export function RecordsTable({ recordsData }: { recordsData: DmarcRecord[] }) {
                       <div>
                         {flexRender(
                           header.column.columnDef.header,
-                          header.getContext()
+                          header.getContext(),
                         )}
                       </div>
                     )}
@@ -402,97 +410,87 @@ export function RecordsTable({ recordsData }: { recordsData: DmarcRecord[] }) {
             ))}
           </thead>
           <tbody className="bg-gray-800 divide-y divide-gray-700">
-            {table.getRowModel().rows.map((row) => (
+            {table.getRowModel().rows.map((row: any) => (
               <tr key={row.id}>
                 {row.getVisibleCells().map((cell) => (
                   <td
                     key={cell.id}
                     className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-200"
                   >
-                    {flexRender(
-                      cell.column.columnDef.cell,
-                      cell.getContext()
-                    )}
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 ))}
               </tr>
             ))}
           </tbody>
         </table>
-        </div>
-        <div className="h-2" />
-        <div className="flex items-center gap-2 mt-4">
-          <button
-            className="border rounded p-1 text-gray-700 bg-gray-200"
-            onClick={() => table.setPageIndex(0)}
-            disabled={!table.getCanPreviousPage()}
-          >
-            {'<<'}
-          </button>
-          <button
-            className="border rounded p-1 text-gray-700 bg-gray-200"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
-            {'<'}
-          </button>
-          <button
-            className="border rounded p-1 text-gray-700 bg-gray-200"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
-            {'>'}
-          </button>
-          <button
-            className="border rounded p-1 text-gray-700 bg-gray-200"
-            onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-            disabled={!table.getCanNextPage()}
-          >
-            {'>>'}
-          </button>
-          <span className="flex items-center gap-1 text-gray-200">
-            <div>Page</div>
-            <strong>
-              {table.getState().pagination.pageIndex + 1} of{' '}
-              {table.getPageCount()}
-            </strong>
-          </span>
-          <span className="flex items-center gap-1 text-gray-200">
-            | Go to page:
-            <input
-              type="number"
-              defaultValue={table.getState().pagination.pageIndex + 1}
-              onChange={(e) => {
-                const page = e.target.value ? Number(e.target.value) - 1 : 0;
-                table.setPageIndex(page);
-              }}
-              className="border p-1 rounded w-16 text-gray-700"
-            />
-          </span>
-          <select
-            value={table.getState().pagination.pageSize}
+      </div>
+      <div className="h-2" />
+      <div className="flex items-center gap-2 mt-4">
+        <button
+          className="border rounded p-1 text-gray-700 bg-gray-200"
+          onClick={() => table.setPageIndex(0)}
+          disabled={!table.getCanPreviousPage()}
+        >
+          {'<<'}
+        </button>
+        <button
+          className="border rounded p-1 text-gray-700 bg-gray-200"
+          onClick={() => table.previousPage()}
+          disabled={!table.getCanPreviousPage()}
+        >
+          {'<'}
+        </button>
+        <button
+          className="border rounded p-1 text-gray-700 bg-gray-200"
+          onClick={() => table.nextPage()}
+          disabled={!table.getCanNextPage()}
+        >
+          {'>'}
+        </button>
+        <button
+          className="border rounded p-1 text-gray-700 bg-gray-200"
+          onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+          disabled={!table.getCanNextPage()}
+        >
+          {'>>'}
+        </button>
+        <span className="flex items-center gap-1 text-gray-200">
+          <div>Page</div>
+          <strong>
+            {table.getState().pagination.pageIndex + 1} of{' '}
+            {table.getPageCount()}
+          </strong>
+        </span>
+        <span className="flex items-center gap-1 text-gray-200">
+          | Go to page:
+          <input
+            type="number"
+            defaultValue={table.getState().pagination.pageIndex + 1}
             onChange={(e) => {
-              table.setPageSize(Number(e.target.value));
+              const page = e.target.value ? Number(e.target.value) - 1 : 0
+              table.setPageIndex(page)
             }}
-            className="border p-1 rounded text-gray-700 bg-gray-200"
-          >
-            {[5, 10, 15, 30, 40, 50].map((pageSize) => (
-              <option key={pageSize} value={pageSize}>
-                Show {pageSize}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="text-gray-200 mt-2">
-          {table.getRowModel().rows.length} Rows
-        </div>
-
+            className="border p-1 rounded w-16 text-gray-700"
+          />
+        </span>
+        <select
+          value={table.getState().pagination.pageSize}
+          onChange={(e) => {
+            table.setPageSize(Number(e.target.value))
+          }}
+          className="border p-1 rounded text-gray-700 bg-gray-200"
+        >
+          {[5, 10, 15, 30, 40, 50].map((pageSize) => (
+            <option key={pageSize} value={pageSize}>
+              Show {pageSize}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="text-gray-200 mt-2">
+        {table.getRowModel().rows.length} Rows
+      </div>
     </div>
-  );
- 
+  )
 }
-
-
-
-
- 

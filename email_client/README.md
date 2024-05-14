@@ -1,0 +1,22 @@
+# ENV example:
+```
+#GMAIL CONFIGURATION
+MODE = IMAP
+
+GMAIL_CLIENT_ID = 'YOUR_GMAIL_CLIENT_ID'
+GMAIL_CLIENT_SECRET = 'YOUR_GMAIL_CLIENT_SECRET'
+GMAIL_REDIRECT_URI = 'YOUR_GMAIL_REDIRECT_URI'
+GMAIL_TOKEN_PATH = 'YOUR_GMAIL_TOKEN_PATH'
+
+#IMAP CONFIGURATION
+IMAP_SERVER =
+IMAP_PORT =
+IMAP_MODE = 
+IMAP_USERNAME = 
+IMAP_PASSWORD =
+
+#directory where the attachments will be saved
+ATTACHMENTS_DIR = ./save_files/attachments
+EXTRACTED_DIR = ./save_files/dmarc/extracted
+PARSED_DIR = ./save_files/dmarc/parsed
+```
