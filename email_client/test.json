@@ -1,0 +1,1288 @@
+[
+    {
+        "feedback": {
+            "version": "1.0",
+            "report_metadata": {
+                "org_name": "Enterprise Outlook",
+                "email": "dmarcreport@microsoft.com",
+                "report_id": "1ac78217c8914bb8aa61d2dd4587530b",
+                "date_range": {
+                    "begin": "1712620800",
+                    "end": "1712707200"
+                }
+            },
+            "policy_published": {
+                "domain": "agc.cl",
+                "adkim": "r",
+                "aspf": "s",
+                "p": "reject",
+                "sp": "quarantine",
+                "pct": "10",
+                "fo": "0"
+            },
+            "record": [
+                {
+                    "row": {
+                        "source_ip": "70.32.84.121",
+                        "count": "2",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "pass",
+                            "spf": "pass"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "munilaja.cl",
+                        "envelope_from": "agc.cl",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "dkim": {
+                            "domain": "agc.cl",
+                            "selector": "default",
+                            "result": "pass"
+                        },
+                        "spf": {
+                            "domain": "agc.cl",
+                            "scope": "mfrom",
+                            "result": "pass"
+                        }
+                    }
+                },
+                {
+                    "row": {
+                        "source_ip": "70.32.84.121",
+                        "count": "1",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "pass",
+                            "spf": "fail"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "munichiguayante.cl",
+                        "envelope_from": "agc.cl",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "dkim": {
+                            "domain": "agc.cl",
+                            "selector": "default",
+                            "result": "pass"
+                        },
+                        "spf": {
+                            "domain": "agc.cl",
+                            "scope": "mfrom",
+                            "result": "temperror"
+                        }
+                    }
+                },
+                {
+                    "row": {
+                        "source_ip": "70.32.84.121",
+                        "count": "1",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "pass",
+                            "spf": "pass"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "munichiguayante.cl",
+                        "envelope_from": "agc.cl",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "dkim": {
+                            "domain": "agc.cl",
+                            "selector": "default",
+                            "result": "pass"
+                        },
+                        "spf": {
+                            "domain": "agc.cl",
+                            "scope": "mfrom",
+                            "result": "pass"
+                        }
+                    }
+                },
+                {
+                    "row": {
+                        "source_ip": "70.32.84.121",
+                        "count": "3",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "fail",
+                            "spf": "pass"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "droguerianunoa.cl",
+                        "envelope_from": "<>",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "spf": {
+                            "domain": "agc.cl",
+                            "scope": "helo",
+                            "result": "pass"
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "feedback": {
+            "version": "1.0",
+            "report_metadata": {
+                "org_name": "Enterprise Outlook",
+                "email": "dmarcreport@microsoft.com",
+                "report_id": "825fa50559604a6aaabdb50f29d17873",
+                "date_range": {
+                    "begin": "1712534400",
+                    "end": "1712620800"
+                }
+            },
+            "policy_published": {
+                "domain": "agc.cl",
+                "adkim": "r",
+                "aspf": "s",
+                "p": "reject",
+                "sp": "quarantine",
+                "pct": "10",
+                "fo": "0"
+            },
+            "record": [
+                {
+                    "row": {
+                        "source_ip": "70.32.84.121",
+                        "count": "2",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "pass",
+                            "spf": "pass"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "bee.cl",
+                        "envelope_from": "agc.cl",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "dkim": {
+                            "domain": "agc.cl",
+                            "selector": "default",
+                            "result": "pass"
+                        },
+                        "spf": {
+                            "domain": "agc.cl",
+                            "scope": "mfrom",
+                            "result": "pass"
+                        }
+                    }
+                },
+                {
+                    "row": {
+                        "source_ip": "70.32.84.121",
+                        "count": "2",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "pass",
+                            "spf": "pass"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "municipalidadquilleco.cl",
+                        "envelope_from": "agc.cl",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "dkim": {
+                            "domain": "agc.cl",
+                            "selector": "default",
+                            "result": "pass"
+                        },
+                        "spf": {
+                            "domain": "agc.cl",
+                            "scope": "mfrom",
+                            "result": "pass"
+                        }
+                    }
+                },
+                {
+                    "row": {
+                        "source_ip": "70.32.84.121",
+                        "count": "2",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "fail",
+                            "spf": "pass"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "droguerianunoa.cl",
+                        "envelope_from": "<>",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "spf": {
+                            "domain": "agc.cl",
+                            "scope": "helo",
+                            "result": "pass"
+                        }
+                    }
+                },
+                {
+                    "row": {
+                        "source_ip": "70.32.84.121",
+                        "count": "2",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "fail",
+                            "spf": "pass"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "lpasteur.cl",
+                        "envelope_from": "<>",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "spf": {
+                            "domain": "agc.cl",
+                            "scope": "helo",
+                            "result": "pass"
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "feedback": {
+            "version": "1.0",
+            "report_metadata": {
+                "org_name": "Outlook.com",
+                "email": "dmarcreport@microsoft.com",
+                "report_id": "bfc7e36f59c44fba9f48b4d7a3c9b71f",
+                "date_range": {
+                    "begin": "1712275200",
+                    "end": "1712361600"
+                }
+            },
+            "policy_published": {
+                "domain": "agc.cl",
+                "adkim": "r",
+                "aspf": "s",
+                "p": "reject",
+                "sp": "quarantine",
+                "pct": "10",
+                "fo": "0"
+            },
+            "record": [
+                {
+                    "row": {
+                        "source_ip": "70.32.84.121",
+                        "count": "1",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "fail",
+                            "spf": "pass"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "hotmail.com",
+                        "envelope_from": "<>",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "spf": {
+                            "domain": "agc.cl",
+                            "scope": "helo",
+                            "result": "pass"
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "feedback": {
+            "version": "1.0",
+            "report_metadata": {
+                "org_name": "Enterprise Outlook",
+                "email": "dmarcreport@microsoft.com",
+                "report_id": "0680eaa88487464ea52463b7a8c59e73",
+                "date_range": {
+                    "begin": "1712016000",
+                    "end": "1712102400"
+                }
+            },
+            "policy_published": {
+                "domain": "agc.cl",
+                "adkim": "r",
+                "aspf": "s",
+                "p": "reject",
+                "sp": "quarantine",
+                "pct": "10",
+                "fo": "0"
+            },
+            "record": [
+                {
+                    "row": {
+                        "source_ip": "70.32.84.121",
+                        "count": "2",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "pass",
+                            "spf": "pass"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "bee.cl",
+                        "envelope_from": "agc.cl",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "dkim": {
+                            "domain": "agc.cl",
+                            "selector": "default",
+                            "result": "pass"
+                        },
+                        "spf": {
+                            "domain": "agc.cl",
+                            "scope": "mfrom",
+                            "result": "pass"
+                        }
+                    }
+                },
+                {
+                    "row": {
+                        "source_ip": "70.32.84.121",
+                        "count": "1",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "fail",
+                            "spf": "pass"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "lpasteur.cl",
+                        "envelope_from": "<>",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "spf": {
+                            "domain": "agc.cl",
+                            "scope": "helo",
+                            "result": "pass"
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "feedback": {
+            "version": "1.0",
+            "report_metadata": {
+                "org_name": "Enterprise Outlook",
+                "email": "dmarcreport@microsoft.com",
+                "report_id": "a4e7368cb4794c919c0ddf66e4b6a049",
+                "date_range": {
+                    "begin": "1712188800",
+                    "end": "1712275200"
+                }
+            },
+            "policy_published": {
+                "domain": "agc.cl",
+                "adkim": "r",
+                "aspf": "s",
+                "p": "reject",
+                "sp": "quarantine",
+                "pct": "10",
+                "fo": "0"
+            },
+            "record": [
+                {
+                    "row": {
+                        "source_ip": "70.32.84.121",
+                        "count": "1",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "pass",
+                            "spf": "pass"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "empresasruiz.cl",
+                        "envelope_from": "agc.cl",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "dkim": {
+                            "domain": "agc.cl",
+                            "selector": "default",
+                            "result": "pass"
+                        },
+                        "spf": {
+                            "domain": "agc.cl",
+                            "scope": "mfrom",
+                            "result": "pass"
+                        }
+                    }
+                },
+                {
+                    "row": {
+                        "source_ip": "70.32.84.121",
+                        "count": "1",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "pass",
+                            "spf": "pass"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "munilaja.cl",
+                        "envelope_from": "agc.cl",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "dkim": {
+                            "domain": "agc.cl",
+                            "selector": "default",
+                            "result": "pass"
+                        },
+                        "spf": {
+                            "domain": "agc.cl",
+                            "scope": "mfrom",
+                            "result": "pass"
+                        }
+                    }
+                },
+                {
+                    "row": {
+                        "source_ip": "70.32.84.121",
+                        "count": "1",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "pass",
+                            "spf": "pass"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "essbio.cl",
+                        "envelope_from": "agc.cl",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "dkim": {
+                            "domain": "agc.cl",
+                            "selector": "default",
+                            "result": "pass"
+                        },
+                        "spf": {
+                            "domain": "agc.cl",
+                            "scope": "mfrom",
+                            "result": "pass"
+                        }
+                    }
+                },
+                {
+                    "row": {
+                        "source_ip": "70.32.84.121",
+                        "count": "1",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "pass",
+                            "spf": "pass"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "contulmo.cl",
+                        "envelope_from": "agc.cl",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "dkim": {
+                            "domain": "agc.cl",
+                            "selector": "default",
+                            "result": "pass"
+                        },
+                        "spf": {
+                            "domain": "agc.cl",
+                            "scope": "mfrom",
+                            "result": "pass"
+                        }
+                    }
+                },
+                {
+                    "row": {
+                        "source_ip": "70.32.84.121",
+                        "count": "1",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "pass",
+                            "spf": "pass"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "bee.cl",
+                        "envelope_from": "agc.cl",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "dkim": {
+                            "domain": "agc.cl",
+                            "selector": "default",
+                            "result": "pass"
+                        },
+                        "spf": {
+                            "domain": "agc.cl",
+                            "scope": "mfrom",
+                            "result": "pass"
+                        }
+                    }
+                },
+                {
+                    "row": {
+                        "source_ip": "70.32.84.121",
+                        "count": "2",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "fail",
+                            "spf": "pass"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "global-pharma.cl",
+                        "envelope_from": "<>",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "spf": {
+                            "domain": "agc.cl",
+                            "scope": "helo",
+                            "result": "pass"
+                        }
+                    }
+                },
+                {
+                    "row": {
+                        "source_ip": "70.32.84.121",
+                        "count": "1",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "fail",
+                            "spf": "pass"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "ethon.cl",
+                        "envelope_from": "<>",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "spf": {
+                            "domain": "agc.cl",
+                            "scope": "helo",
+                            "result": "pass"
+                        }
+                    }
+                },
+                {
+                    "row": {
+                        "source_ip": "70.32.84.121",
+                        "count": "1",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "pass",
+                            "spf": "pass"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "cambium.cl",
+                        "envelope_from": "agc.cl",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "dkim": {
+                            "domain": "agc.cl",
+                            "selector": "default",
+                            "result": "pass"
+                        },
+                        "spf": {
+                            "domain": "agc.cl",
+                            "scope": "mfrom",
+                            "result": "pass"
+                        }
+                    }
+                },
+                {
+                    "row": {
+                        "source_ip": "70.32.84.121",
+                        "count": "1",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "pass",
+                            "spf": "pass"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "inchalam.cl",
+                        "envelope_from": "agc.cl",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "dkim": {
+                            "domain": "agc.cl",
+                            "selector": "default",
+                            "result": "pass"
+                        },
+                        "spf": {
+                            "domain": "agc.cl",
+                            "scope": "mfrom",
+                            "result": "pass"
+                        }
+                    }
+                },
+                {
+                    "row": {
+                        "source_ip": "70.32.84.121",
+                        "count": "1",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "fail",
+                            "spf": "pass"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "droguerianunoa.cl",
+                        "envelope_from": "<>",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "spf": {
+                            "domain": "agc.cl",
+                            "scope": "helo",
+                            "result": "pass"
+                        }
+                    }
+                },
+                {
+                    "row": {
+                        "source_ip": "70.32.84.121",
+                        "count": "1",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "pass",
+                            "spf": "pass"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "innergy.cl",
+                        "envelope_from": "agc.cl",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "dkim": {
+                            "domain": "agc.cl",
+                            "selector": "default",
+                            "result": "pass"
+                        },
+                        "spf": {
+                            "domain": "agc.cl",
+                            "scope": "mfrom",
+                            "result": "pass"
+                        }
+                    }
+                },
+                {
+                    "row": {
+                        "source_ip": "70.32.84.121",
+                        "count": "2",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "fail",
+                            "spf": "pass"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "lpasteur.cl",
+                        "envelope_from": "<>",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "spf": {
+                            "domain": "agc.cl",
+                            "scope": "helo",
+                            "result": "pass"
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "feedback": {
+            "version": "1.0",
+            "report_metadata": {
+                "org_name": "Enterprise Outlook",
+                "email": "dmarcreport@microsoft.com",
+                "report_id": "771f7a885c1d41d1a2a7a90648615f0c",
+                "date_range": {
+                    "begin": "1712275200",
+                    "end": "1712361600"
+                }
+            },
+            "policy_published": {
+                "domain": "agc.cl",
+                "adkim": "r",
+                "aspf": "s",
+                "p": "reject",
+                "sp": "quarantine",
+                "pct": "10",
+                "fo": "0"
+            },
+            "record": [
+                {
+                    "row": {
+                        "source_ip": "70.32.84.121",
+                        "count": "2",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "fail",
+                            "spf": "pass"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "claseejecutiva.cl",
+                        "envelope_from": "<>",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "spf": {
+                            "domain": "agc.cl",
+                            "scope": "helo",
+                            "result": "pass"
+                        }
+                    }
+                },
+                {
+                    "row": {
+                        "source_ip": "70.32.84.121",
+                        "count": "2",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "pass",
+                            "spf": "pass"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "bee.cl",
+                        "envelope_from": "agc.cl",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "dkim": {
+                            "domain": "agc.cl",
+                            "selector": "default",
+                            "result": "pass"
+                        },
+                        "spf": {
+                            "domain": "agc.cl",
+                            "scope": "mfrom",
+                            "result": "pass"
+                        }
+                    }
+                },
+                {
+                    "row": {
+                        "source_ip": "70.32.84.121",
+                        "count": "3",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "fail",
+                            "spf": "pass"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "global-pharma.cl",
+                        "envelope_from": "<>",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "spf": {
+                            "domain": "agc.cl",
+                            "scope": "helo",
+                            "result": "pass"
+                        }
+                    }
+                },
+                {
+                    "row": {
+                        "source_ip": "104.47.73.41",
+                        "count": "1",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "fail",
+                            "spf": "fail"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "claseejecutiva.cl",
+                        "envelope_from": "<>",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "spf": {
+                            "domain": "NAM04-DM6-obe.outbound.protection.outlook.com",
+                            "scope": "helo",
+                            "result": "pass"
+                        }
+                    }
+                },
+                {
+                    "row": {
+                        "source_ip": "104.47.56.168",
+                        "count": "1",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "fail",
+                            "spf": "fail"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "claseejecutiva.cl",
+                        "envelope_from": "<>",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "spf": {
+                            "domain": "NAM11-CO1-obe.outbound.protection.outlook.com",
+                            "scope": "helo",
+                            "result": "pass"
+                        }
+                    }
+                },
+                {
+                    "row": {
+                        "source_ip": "104.47.57.41",
+                        "count": "1",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "fail",
+                            "spf": "fail"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "claseejecutiva.cl",
+                        "envelope_from": "<>",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "spf": {
+                            "domain": "NAM02-SN1-obe.outbound.protection.outlook.com",
+                            "scope": "helo",
+                            "result": "pass"
+                        }
+                    }
+                },
+                {
+                    "row": {
+                        "source_ip": "70.32.84.121",
+                        "count": "2",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "fail",
+                            "spf": "pass"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "droguerianunoa.cl",
+                        "envelope_from": "<>",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "spf": {
+                            "domain": "agc.cl",
+                            "scope": "helo",
+                            "result": "pass"
+                        }
+                    }
+                },
+                {
+                    "row": {
+                        "source_ip": "70.32.84.121",
+                        "count": "2",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "fail",
+                            "spf": "pass"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "lpasteur.cl",
+                        "envelope_from": "<>",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "spf": {
+                            "domain": "agc.cl",
+                            "scope": "helo",
+                            "result": "pass"
+                        }
+                    }
+                },
+                {
+                    "row": {
+                        "source_ip": "104.47.51.40",
+                        "count": "1",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "fail",
+                            "spf": "fail"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "claseejecutiva.cl",
+                        "envelope_from": "<>",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "spf": {
+                            "domain": "NAM02-BN1-obe.outbound.protection.outlook.com",
+                            "scope": "helo",
+                            "result": "pass"
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "feedback": {
+            "version": "1.0",
+            "report_metadata": {
+                "org_name": "Enterprise Outlook",
+                "email": "dmarcreport@microsoft.com",
+                "report_id": "85dbad4e22ff4e1a80a46a6e5499b515",
+                "date_range": {
+                    "begin": "1712102400",
+                    "end": "1712188800"
+                }
+            },
+            "policy_published": {
+                "domain": "agc.cl",
+                "adkim": "r",
+                "aspf": "s",
+                "p": "reject",
+                "sp": "quarantine",
+                "pct": "10",
+                "fo": "0"
+            },
+            "record": [
+                {
+                    "row": {
+                        "source_ip": "70.32.84.121",
+                        "count": "1",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "pass",
+                            "spf": "pass"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "cl.nsg.com",
+                        "envelope_from": "agc.cl",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "dkim": {
+                            "domain": "agc.cl",
+                            "selector": "default",
+                            "result": "pass"
+                        },
+                        "spf": {
+                            "domain": "agc.cl",
+                            "scope": "mfrom",
+                            "result": "pass"
+                        }
+                    }
+                },
+                {
+                    "row": {
+                        "source_ip": "70.32.84.121",
+                        "count": "1",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "pass",
+                            "spf": "pass"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "eolico.cl",
+                        "envelope_from": "agc.cl",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "dkim": {
+                            "domain": "agc.cl",
+                            "selector": "default",
+                            "result": "pass"
+                        },
+                        "spf": {
+                            "domain": "agc.cl",
+                            "scope": "mfrom",
+                            "result": "pass"
+                        }
+                    }
+                },
+                {
+                    "row": {
+                        "source_ip": "70.32.84.121",
+                        "count": "2",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "pass",
+                            "spf": "pass"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "munichiguayante.cl",
+                        "envelope_from": "agc.cl",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "dkim": {
+                            "domain": "agc.cl",
+                            "selector": "default",
+                            "result": "pass"
+                        },
+                        "spf": {
+                            "domain": "agc.cl",
+                            "scope": "mfrom",
+                            "result": "pass"
+                        }
+                    }
+                },
+                {
+                    "row": {
+                        "source_ip": "70.32.84.121",
+                        "count": "1",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "pass",
+                            "spf": "pass"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "fpc.cl",
+                        "envelope_from": "agc.cl",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "dkim": {
+                            "domain": "agc.cl",
+                            "selector": "default",
+                            "result": "pass"
+                        },
+                        "spf": {
+                            "domain": "agc.cl",
+                            "scope": "mfrom",
+                            "result": "pass"
+                        }
+                    }
+                },
+                {
+                    "row": {
+                        "source_ip": "70.32.84.121",
+                        "count": "2",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "pass",
+                            "spf": "pass"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "pacificblu.cl",
+                        "envelope_from": "agc.cl",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "dkim": {
+                            "domain": "agc.cl",
+                            "selector": "default",
+                            "result": "pass"
+                        },
+                        "spf": {
+                            "domain": "agc.cl",
+                            "scope": "mfrom",
+                            "result": "pass"
+                        }
+                    }
+                },
+                {
+                    "row": {
+                        "source_ip": "70.32.84.121",
+                        "count": "1",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "pass",
+                            "spf": "pass"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "jcabrera.cl",
+                        "envelope_from": "agc.cl",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "dkim": {
+                            "domain": "agc.cl",
+                            "selector": "default",
+                            "result": "pass"
+                        },
+                        "spf": {
+                            "domain": "agc.cl",
+                            "scope": "mfrom",
+                            "result": "pass"
+                        }
+                    }
+                },
+                {
+                    "row": {
+                        "source_ip": "70.32.84.121",
+                        "count": "1",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "fail",
+                            "spf": "pass"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "svti.cl",
+                        "envelope_from": "agc.cl",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "dkim": {
+                            "domain": "agc.cl",
+                            "selector": "default",
+                            "result": "fail"
+                        },
+                        "spf": {
+                            "domain": "agc.cl",
+                            "scope": "mfrom",
+                            "result": "pass"
+                        }
+                    }
+                },
+                {
+                    "row": {
+                        "source_ip": "70.32.84.121",
+                        "count": "2",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "pass",
+                            "spf": "pass"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "biodiversa.com",
+                        "envelope_from": "agc.cl",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "dkim": {
+                            "domain": "agc.cl",
+                            "selector": "default",
+                            "result": "pass"
+                        },
+                        "spf": {
+                            "domain": "agc.cl",
+                            "scope": "mfrom",
+                            "result": "pass"
+                        }
+                    }
+                },
+                {
+                    "row": {
+                        "source_ip": "70.32.84.121",
+                        "count": "1",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "fail",
+                            "spf": "pass"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "lpasteur.cl",
+                        "envelope_from": "<>",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "spf": {
+                            "domain": "agc.cl",
+                            "scope": "helo",
+                            "result": "pass"
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "feedback": {
+            "version": "1.0",
+            "report_metadata": {
+                "org_name": "Enterprise Outlook",
+                "email": "dmarcreport@microsoft.com",
+                "report_id": "8d1c7d9e9e344550806d4e12807e257a",
+                "date_range": {
+                    "begin": "1712361600",
+                    "end": "1712448000"
+                }
+            },
+            "policy_published": {
+                "domain": "agc.cl",
+                "adkim": "r",
+                "aspf": "s",
+                "p": "reject",
+                "sp": "quarantine",
+                "pct": "10",
+                "fo": "0"
+            },
+            "record": [
+                {
+                    "row": {
+                        "source_ip": "70.32.84.121",
+                        "count": "1",
+                        "policy_evaluated": {
+                            "disposition": "none",
+                            "dkim": "pass",
+                            "spf": "pass"
+                        }
+                    },
+                    "identifiers": {
+                        "envelope_to": "bee.cl",
+                        "envelope_from": "agc.cl",
+                        "header_from": "agc.cl"
+                    },
+                    "auth_results": {
+                        "dkim": {
+                            "domain": "agc.cl",
+                            "selector": "default",
+                            "result": "pass"
+                        },
+                        "spf": {
+                            "domain": "agc.cl",
+                            "scope": "mfrom",
+                            "result": "pass"
+                        }
+                    }
+                }
+            ]
+        }
+    }
+]

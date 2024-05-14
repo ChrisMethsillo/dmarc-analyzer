@@ -67,7 +67,7 @@ class IMAPClient(AbstractEmailClient):
             if search_criteria:
                 self.mailbox.folder.search(search_criteria)
 
-            for msg in self.mailbox.fetch(criteria=A(seen=False), mark_seen=True):
+            for msg in self.mailbox.fetch():
                 has_new_messages = True
                 for att in msg.attachments:
                     if att.filename.lower().endswith(file_type.lower()):

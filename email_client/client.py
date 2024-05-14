@@ -6,6 +6,8 @@ from email_clients.imapclient import IMAPClient
 from email_clients.gmailclient import GmailClient
 from utils.bulk_dmarc_reports import parse_dmarc_reports_dir
 from utils.extract_gz import multiple_extract_gz
+from requests import request
+import json
 
 
 client = None
@@ -24,7 +26,11 @@ def parse_dmarc_files():
     if not extracted_files:
         return []
     report_list = parse_dmarc_reports_dir(extracted_dir, move_files=True, parsed_dir=parsed_dir)
-    print(report_list)
+    for report in report_list:
+        #make a request to the API to save the report
+        print(json.dumps(report, indent=4))
+        response = request("POST", "http://localhost:8000/aggregated_report", json=report.get("feedback"))
+        print(response.text)
     
 def watch_emails():
     client.watch(file_type='xml.gz', callback=parse_dmarc_files, save_directory=attachment_dir, timeout_seconds=300)

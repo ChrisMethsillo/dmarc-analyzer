@@ -1,0 +1,7 @@
+{
+    "aggregatedReport": "aggregated_report",
+    "aggregatedReportByDateRange": "aggregated_report",
+    "aggregatedReportById": "aggregated_report",
+    "createAggregatedReport": "aggregated_report",
+    "updateAggregatedReport": "aggregated_report"
+}

@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #000;
+  --secondary-color: #fff;
+  --accent-color: #a876aa;
+  --main-transition: all 0.5s ease-in;
+}
+
+body{
+  --primary-color: #fff;
+  --secondary-color: #181625;
+}
+
+body{
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  transition: var(--main-transition);
+}
+
+.toggle {
+  color: var(--primary-color);
+  background-color: transparent;
+  font-size: 25px;
+  border: 0;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: var(--main-transition), scale 0.2s ease;
+}
