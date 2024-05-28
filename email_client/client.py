@@ -28,9 +28,11 @@ def parse_dmarc_files():
     report_list = parse_dmarc_reports_dir(extracted_dir, move_files=True, parsed_dir=parsed_dir)
     for report in report_list:
         #make a request to the API to save the report
-        print(json.dumps(report, indent=4))
-        response = request("POST", "http://localhost:8000/aggregated_report", json=report.get("feedback"))
+        response = request("POST", "http://localhost:8000/api/v1/aggregated_report", json=report.get("feedback"))
         print(response.text)
+        if  int(response.status_code) >= 300:
+            print(json.dumps(report, indent=4))
+            print("Error saving report", response.text)
     
 def watch_emails():
     client.watch(file_type='xml.gz', callback=parse_dmarc_files, save_directory=attachment_dir, timeout_seconds=300)

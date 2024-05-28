@@ -2,28 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+
 * {
   box-sizing: border-box;
 }
 
 :root {
-  --primary-color: #000;
-  --secondary-color: #fff;
+  --primary-color: #fff; /* Cambiado a blanco para el modo oscuro */
+  --secondary-color: #181625; /* Color de fondo oscuro */
   --accent-color: #a876aa;
   --main-transition: all 0.5s ease-in;
 }
 
-body{
-  --primary-color: #fff;
-  --secondary-color: #181625;
-}
-
-body{
-  background-color: var(--secondary-color);
-  color: var(--primary-color);
-}
-
 body {
+  background-color: var(--secondary-color);
+  color: var(--primary-color); /* Restaurado el color de texto */
   font-family: "Montserrat", sans-serif;
   display: flex;
   flex-direction: column;

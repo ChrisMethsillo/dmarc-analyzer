@@ -5,6 +5,7 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from starlette.middleware.cors import CORSMiddleware
 from config import CONFIG
 from models.dmarc_report import *
+from models.users import *
 
 
 
@@ -21,13 +22,12 @@ It supports:
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):  # type: ignore
-    
-
     app.db = AsyncIOMotorClient(CONFIG.mongo_uri).account 
     await init_beanie(app.db, document_models=[
-        DMARCReportModel
+        DMARCReportModel,
+        User
         ]) 
-    print("Startup complete")
+    
     yield
     print("Shutdown complete")
 
@@ -35,7 +35,7 @@ async def lifespan(app: FastAPI):  # type: ignore
 
 
 app = FastAPI(
-    title="My Server",
+    title="DMARC Report API",
     lifespan=lifespan,
 )
 

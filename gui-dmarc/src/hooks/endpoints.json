@@ -1,7 +1,9 @@
 {
-    "aggregatedReport": "aggregated_report",
-    "aggregatedReportByDateRange": "aggregated_report",
-    "aggregatedReportById": "aggregated_report",
-    "createAggregatedReport": "aggregated_report",
-    "updateAggregatedReport": "aggregated_report"
+    "aggregatedReport": "api/v1/aggregated_report",
+    "aggregatedReportByDateRange": "api/v1/aggregated_report",
+    "aggregatedReportById": "api/v1/aggregated_report",
+    "createAggregatedReport": "api/v1/aggregated_report",
+    "updateAggregatedReport": "api/v1/aggregated_report",
+    "graphQl": "api/graphql",
+    "auth": "auth/token"
 }

@@ -59,6 +59,6 @@ class DMARCReportModel(Document):
     record: List[Record]
 
     class Settings:
-        name = "dmarc_report"
+        collection = "dmarc_report"
 
     

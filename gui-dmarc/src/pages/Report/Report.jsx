@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { getDmarcReport } from '@src/hooks/dmarcReports'
-import { RecordsTable } from '@src/components/Tables'
+import { RecordsTable } from '@src/components/ReportsTables'
 import AuthResultsChart from '../../components/PieCharts'
 
 function DataCard({ title, children }) {
@@ -48,43 +48,78 @@ function ReportData() {
                 <table className="flex-row divide-y border bg-gray-700">
                   <thead className="">
                     <tr>
-                      <th className="px-4 py-2 border">domain</th>
+                      <th
+                        className="px-4 py-2 border"
+                        title="The domain for which the policy is being published"
+                      >
+                        Domain
+                      </th>
                       <td className="border px-4 py-2">
                         {report.policy_published.domain}
                       </td>
                     </tr>
                     <tr>
-                      <th className="px-4 py-2 border">adkim</th>
+                      <th
+                        className="px-4 py-2 border"
+                        title="Alignment Mode for DKIM"
+                      >
+                        ADKIM
+                      </th>
                       <td className="border px-4 py-2">
                         {report.policy_published.adkim}
                       </td>
                     </tr>
                     <tr>
-                      <th className="px-4 py-2 border">aspf</th>
+                      <th
+                        className="px-4 py-2 border"
+                        title="Alignment Mode for SPF"
+                      >
+                        ASPF
+                      </th>
                       <td className="border px-4 py-2">
                         {report.policy_published.aspf}
                       </td>
                     </tr>
                     <tr>
-                      <th className="px-4 py-2 border">o</th>
+                      <th
+                        className="px-4 py-2 border"
+                        title="Policy for Organizational Domains"
+                      >
+                        Policy
+                      </th>
                       <td className="border px-4 py-2">
                         {report.policy_published.p}
                       </td>
                     </tr>
                     <tr>
-                      <th className="px-4 py-2 border">sp</th>
+                      <th
+                        className="px-4 py-2 border"
+                        title="Policy for Subdomains"
+                      >
+                        Subdomain Policy
+                      </th>
                       <td className="border px-4 py-2">
                         {report.policy_published.sp}
                       </td>
                     </tr>
                     <tr>
-                      <th className="px-4 py-2 border">pct</th>
+                      <th
+                        className="px-4 py-2 border"
+                        title="Percentage of messages subjected to filtering"
+                      >
+                        Percentage
+                      </th>
                       <td className="border px-4 py-2">
                         {report.policy_published.pct}
                       </td>
                     </tr>
                     <tr>
-                      <th className="px-4 py-2 border">fo</th>
+                      <th
+                        className="px-4 py-2 border"
+                        title="Failure reporting options"
+                      >
+                        Failure Options
+                      </th>
                       <td className="border px-4 py-2">
                         {report.policy_published.fo}
                       </td>
