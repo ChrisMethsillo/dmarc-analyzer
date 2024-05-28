@@ -1,64 +1,93 @@
-from typing import Optional, List
-from pydantic import  EmailStr, Field, BaseModel
-
+from typing import Optional, List, Union
+from pydantic import EmailStr, Field, BaseModel, validator
 from uuid import UUID
 from beanie import Document, Indexed
 from datetime import datetime
 
-class SPF(BaseModel):
-    domain: str
-    scope: Optional[str]
-    result: str
+class DateRangeType(BaseModel):
+    begin: datetime
+    end: datetime
 
-class DKIM(BaseModel):
-    domain: str
-    selector: Optional[str]
-    result: str
+class ReportMetadataType(BaseModel):
+    org_name: str
+    email: EmailStr
+    extra_contact_info: Optional[str] = None
+    report_id: str
+    date_range: DateRangeType
+    error: Optional[List[str]] = None
 
-class AuthResult(BaseModel):
-    spf : Optional[SPF] = None
-    dkim: Optional[DKIM] = None
 
-class PolicyEvaluated(BaseModel):
+class PolicyOverrideReason(BaseModel):
+    type: str
+    comment: Optional[str] = None
+
+class PolicyEvaluatedType(BaseModel):
     disposition: str
     dkim: str
     spf: str
+    reason: Optional[Union[PolicyOverrideReason, List[PolicyOverrideReason]]] = None
 
-class Row(BaseModel):
+    @validator('reason', pre=True)
+    def ensure_reason_is_list(cls, v):
+        if v is None:
+            return v
+        if isinstance(v, list):
+            return v
+        return [v]
+
+
+class RowType(BaseModel):
     source_ip: str
     count: int
-    policy_evaluated: PolicyEvaluated
+    policy_evaluated: PolicyEvaluatedType
 
-class Identifiers(BaseModel):
-    envelope_to: str
-    envelope_from: str
-    header_from: str
+class IdentifierType(BaseModel):
+    envelope_to: Optional[str] = None
+    envelope_from: Optional[str] = None
+    header_from: Optional[str] = None
 
-class Record(BaseModel):
-    row: Row
-    identifiers: Identifiers
-    auth_results: Optional[AuthResult] = None
 
-class PolicyPublished(BaseModel):
+class DKIMAuthResultType(BaseModel):
     domain: str
-    adkim: str
-    aspf: str
-    p: str
-    sp: str
-    pct: int
-    fo: int
+    selector: Optional[str] = None
+    result: str
+    human_result: Optional[str] = None
+
+
+class SPFAuthResultType(BaseModel):
+    domain: str
+    scope: Optional[str] = None
+    result: str
+
+class AuthResultType(BaseModel):
+    dkim: Optional[DKIMAuthResultType] = None
+    spf: Optional[SPFAuthResultType] = None
+
+class RecordType(BaseModel):
+    row: RowType
+    identifiers: IdentifierType
+    auth_results: AuthResultType
+
+class PolicyPublishedType(BaseModel):
+    domain: str
+    adkim: Optional[str] = None
+    aspf: Optional[str] = None
+    p: Optional[str] = None
+    sp: Optional[str] = None
+    pct: Optional[int] = None
+    fo: Optional[str] = None
 
 class DMARCReportModel(Document):
-    version: str
-    org_name: str 
-    report_id: UUID
-    email: EmailStr
-    date_begin: datetime
-    date_end: datetime
-    policy_published: PolicyPublished
-    record: List[Record]
-
+    version: Optional[str] = None
+    report_metadata: ReportMetadataType
+    policy_published: PolicyPublishedType
+    record: Union[List[RecordType], RecordType]
+    
+    @validator('record', pre=True)
+    def ensure_record_is_list(cls, v):
+        if isinstance(v, list):
+            return v
+        return [v]
+    
     class Settings:
         collection = "dmarc_report"
-
-    

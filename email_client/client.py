@@ -29,7 +29,6 @@ def parse_dmarc_files():
     for report in report_list:
         #make a request to the API to save the report
         response = request("POST", "http://localhost:8000/api/v1/aggregated_report", json=report.get("feedback"))
-        print(response.text)
         if  int(response.status_code) >= 300:
             print(json.dumps(report, indent=4))
             print("Error saving report", response.text)
