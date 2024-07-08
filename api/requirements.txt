@@ -3,3 +3,6 @@ uvicorn[standard]
 pydantic[email]
 beanie
 python-decouple
+passlib
+pyjwt
+strawberry-graphql[fastapi]

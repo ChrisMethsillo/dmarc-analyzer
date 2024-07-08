@@ -27,9 +27,10 @@ def parse_dmarc_files():
         return []
     report_list = parse_dmarc_reports_dir(extracted_dir, move_files=True, parsed_dir=parsed_dir)
     for report in report_list:
-        #make a request to the API to save the report
-        response = request("POST", "http://localhost:8000/api/v1/aggregated_report", json=report.get("feedback"))
-        if  int(response.status_code) >= 300:
+        # make a request to the API to save the report
+        headers = {"X-API-Key": "keytest1"}  # Add the X-Api-Key header
+        response = request("POST", "http://localhost:8000/api/v1/aggregated_report", json=report.get("feedback"), headers=headers)
+        if int(response.status_code) >= 300:
             print(json.dumps(report, indent=4))
             print("Error saving report", response.text)
     
@@ -64,6 +65,6 @@ if __name__ == "__main__":
         os.makedirs(extracted_dir)
     if not os.path.exists(parsed_dir):
         os.makedirs(parsed_dir)
-    
+            
     watch_emails()
     

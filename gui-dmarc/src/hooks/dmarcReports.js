@@ -1,9 +1,8 @@
-import axios from 'axios'
+import axiosInstance from './axiosInstance'
 import endpoints from './endpoints.json'
-const URL = import.meta.env.VITE_BACKEND_URL
 
 function getDmarcReportsByDateRange(startDate, endDate) {
-  return axios.get(`${URL}/${endpoints.aggregatedReportByDateRange}`, {
+  return axiosInstance.get(`/${endpoints.aggregatedReportByDateRange}`, {
     params: {
       start_date: startDate,
       end_date: endDate,
@@ -12,7 +11,7 @@ function getDmarcReportsByDateRange(startDate, endDate) {
 }
 
 function getDmarcReport(id) {
-  return axios.get(`${URL}/${endpoints.aggregatedReport}/${id}`)
+  return axiosInstance.get(`/${endpoints.aggregatedReport}/${id}`)
 }
 
 async function getIpsByRange(startDate, endDate) {
@@ -31,13 +30,13 @@ async function getIpsByRange(startDate, endDate) {
   }
   `
 
-  const urlQuery = `${URL}/${endpoints.graphQl}/`
+  const urlQuery = `/${endpoints.graphQl}/`
   const headers = {
     'Content-Type': 'application/json',
   }
 
   try {
-    const response = await axios.post(urlQuery, { query }, { headers })
+    const response = await axiosInstance.post(urlQuery, { query }, { headers })
     if (response.data && response.data.data) {
       const reports = response.data.data.all_dmarc_reports_by_date_range
       const ipCount = {}
@@ -87,13 +86,13 @@ async function getIdentifiersByDate(startDate, endDate) {
   }
   `
 
-  const urlQuery = `${URL}/${endpoints.graphQl}/`
+  const urlQuery = `/${endpoints.graphQl}/`
   const headers = {
     'Content-Type': 'application/json',
   }
 
   try {
-    const response = await axios.post(urlQuery, { query }, { headers })
+    const response = await axiosInstance.post(urlQuery, { query }, { headers })
     if (response.data && response.data.data) {
       const reports = response.data.data.all_dmarc_reports_by_date_range
       const envelopeTo = {}

@@ -32,7 +32,7 @@ function Dashboard() {
       }
     }
     fetchIps()
-  }, [])
+  }, [startDate, endDate])
 
   useEffect(() => {
     setLoading(true)

@@ -1,55 +1,110 @@
 
+from datetime import timedelta
+from typing import Annotated, Optional
 from fastapi import APIRouter, Depends, HTTPException, status
-from pydantic import BaseModel
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
-from beanie import PydanticObjectId
-from models.users import User, UserCreate, UserResponse
-from utils.auth import *
+from fastapi.security import APIKeyHeader, OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from utils.auth import ACCESS_TOKEN_EXPIRE_MINUTES, ALGORITHM, API_KEYS, SECRET_KEY, create_access_token, get_password_hash, verify_password
+from models.users import *
+import jwt
+from jwt.exceptions import InvalidTokenError
+from config import *
 
 router = APIRouter()
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/token", auto_error=False)
+api_key_header = APIKeyHeader(name="X-API-Key", auto_error=False)
 
-class Token(BaseModel):
-    access_token: str
-    token_type: str
-
-
-@router.post("/register", response_model=UserResponse)
-async def register(user: UserCreate):
-    user_exists = await User.find_one(User.email == user.email)
-    if user_exists:
-        raise HTTPException(status_code=400, detail="Email already registered")
-    hashed_password = get_password_hash(user.password)
-    new_user = User(email=user.email, hashed_password=hashed_password)
-    await new_user.insert()
-    return UserResponse.from_user(new_user)
-
-@router.post("/token", response_model=Token)
-async def login(form_data: OAuth2PasswordRequestForm = Depends()):
-    user = await User.find_one(User.email == form_data.username)
-    if not user or not verify_password(form_data.password, user.hashed_password):
-        raise HTTPException(status_code=401, detail="Incorrect username or password")
-    access_token = create_access_token(data={"sub": str(user.id)})
-    return {"access_token": access_token, "token_type": "bearer"}
-
-async def get_current_user(token: str = Depends(oauth2_scheme)):
-    credentials_exception = HTTPException(
-        status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="Could not validate credentials",
-        headers={"WWW-Authenticate": "Bearer"},
-    )
-    try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        user_id: str = payload.get("sub")
-        if user_id is None:
-            raise credentials_exception
-    except JWTError:
-        raise credentials_exception
-    user = await User.get(PydanticObjectId(user_id))
-    if user is None:
-        raise credentials_exception
+async def get_user(username: str):
+    user = await User.find_one(User.username==username)
     return user
 
+async def authenticate_user(username: str, password: str):
+    user = await get_user(username)
+    if not user:
+        return False
+    if not verify_password(password, user.password):
+        return False
+    return user
+
+
+async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]):
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        username: str = payload.get("sub")
+        if username is None:
+            return None
+        token_data = TokenData(username=username)
+    except InvalidTokenError:
+        return None
+    user = await get_user(username=token_data.username)
+    if user is None:
+        return None
+    return UserResponse.from_user(user)
+
+async def authenticate_api_key(api_key: str = Depends(api_key_header)):
+    if api_key in API_KEYS:
+        return api_key
+    return None
+    
+@router.post("/token")
+async def login_for_access_token(
+    form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
+) -> Token:
+    user = await authenticate_user(form_data.username, form_data.password)
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Incorrect credentials",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token = create_access_token(
+        data={"sub": user.username}, expires_delta=access_token_expires
+    )
+    return Token(access_token=access_token, token_type="bearer")
+
+async def get_current_auth(api_key: Optional[str] = Depends(authenticate_api_key), 
+                           user: Optional[UserResponse] = Depends(get_current_user)):
+    if api_key:
+        return True, api_key
+    if user:
+        return True, user
+    raise HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Not authenticated",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+
+@router.post("/register")
+async def register_user(user: UserCreate, auth_user: tuple = Depends(get_current_auth)):
+    is_authenticated, auth = auth_user
+    if not is_authenticated:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Not authenticated")
+
+    if type(auth_user) == User and auth_user.user_type != "admin":
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Not authenticated",
+        )
+
+    user_exists = await User.find_one({"email": user.email})
+    if user_exists:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail="User with this email already exists",
+        )
+
+    password = get_password_hash(user.password)
+    new_user = User(username=user.username, email=user.email, user_type=user.user_type, password=password)
+    await new_user.insert()
+
+    return {
+        "message": "User created successfully",
+        "username": user.username,
+        "email": user.email,
+    }
+    
 @router.get("/users/me", response_model=UserResponse)
-async def read_users_me(current_user: User = Depends(get_current_user)):
-    return UserResponse.from_user(current_user)
+async def read_users_me(user: UserResponse = Depends(get_current_user)):
+    if user is None:
+        raise HTTPException(status_code=401, detail="Not authenticated")
+    return user

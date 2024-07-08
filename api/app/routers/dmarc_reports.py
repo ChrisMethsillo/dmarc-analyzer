@@ -4,23 +4,28 @@ from fastapi import APIRouter, Depends, Query, status, HTTPException
 from fastapi.encoders import jsonable_encoder
 import pymongo
 from models.dmarc_report import *
+from routers.auth import get_current_auth
 
 router = APIRouter()
 
 @router.post("/aggregated_report", status_code=status.HTTP_201_CREATED)
-async def create_dmarc_report(report: dict):
+async def create_dmarc_report(report: dict, auth: tuple = Depends(get_current_auth)):
     """
     Create a DMARC report.
 
     Args:
         report (dict): The DMARC report to be created.
-
+        auth (tuple): The authentication tuple.
     Returns:
         dict: A dictionary containing a success message.
 
     Raises:
         HTTPException: If the report_id is missing or if a DMARC report with the same report_id already exists.
     """
+    is_authenticated, user = auth
+    if not is_authenticated:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Not authenticated")
+    
     report_id = report.get("report_metadata", {}).get("report_id")
     if not report_id:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="report_id is required in report_metadata")
@@ -56,6 +61,7 @@ async def get_dmarc_reports_by_date_range(start_date: datetime, end_date: dateti
     Args:
         start_date (datetime): The start date of the date range.
         end_date (datetime): The end date of the date range.
+        
 
     Returns:
         List[DMARCReportModel]: A list of DMARC reports within the specified date range.
@@ -83,6 +89,7 @@ async def get_dmarc_reports(
     end_date: Optional[datetime] = None,
     skip: int = 0,
     limit: int = 10,
+    auth: tuple = Depends(get_current_auth)
 ):
     """
     Retrieve DMARC reports based on the specified date range or retrieve all DMARC reports.
@@ -92,10 +99,15 @@ async def get_dmarc_reports(
     - end_date (Optional[datetime]): The end date of the date range to filter the reports. Defaults to None.
     - skip (int): The number of reports to skip. Defaults to 0.
     - limit (int): The maximum number of reports to retrieve. Defaults to 10.
+    - auth (tuple): The authentication tuple.
 
     Returns:
     - List[DMARCReportModel]: A list of DMARC reports matching the specified criteria.
     """
+    is_authenticated, user = auth
+    if not is_authenticated:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Not authenticated")
+    
     if start_date and end_date:
         return await get_dmarc_reports_by_date_range(start_date, end_date)
     else:
@@ -103,12 +115,13 @@ async def get_dmarc_reports(
 
 
 @router.get("/aggregated_report/{report_id}", response_model=DMARCReportModel)
-async def get_dmarc_report_by_id(report_id: str):
+async def get_dmarc_report_by_id(report_id: str, auth: tuple = Depends(get_current_auth)):
     """
     Retrieve a DMARC report by its ID.
 
     Parameters:
     - report_id (str): The ID of the DMARC report to retrieve.
+    - auth (tuple): The authentication tuple.
 
     Returns:
     - DMARCReportModel: The retrieved DMARC report.
@@ -116,26 +129,12 @@ async def get_dmarc_report_by_id(report_id: str):
     Raises:
     - HTTPException: If the DMARC report is not found.
     """
+    is_authenticated, user = auth
+    if not is_authenticated:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Not authenticated")
+    
     report = await DMARCReportModel.find_one({"report_metadata.report_id": report_id})
     if not report:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="DMARC Report not found")
     return report
   
-@router.put("/aggregated_report/{report_id}", status_code=status.HTTP_200_OK)
-async def update_dmarc_report(report_id: str, updated_data: DMARCReportModel):
-    """
-    Update a DMARC report with the given report ID and updated data.
-
-    Args:
-        report_id (str): The ID of the report to be updated.
-        updated_data (DMARCReportModel): The updated data for the report.
-
-    Raises:
-        HTTPException: If the report with the given ID does not exist.
-
-    Returns:
-        None
-    """
-    existing_report = await DMARCReportModel.get(report_id)
-    if not existing_report:
-        raise HTTPException(status_code=status.HTTP_404_)

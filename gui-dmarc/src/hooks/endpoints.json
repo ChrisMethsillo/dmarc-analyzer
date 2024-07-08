@@ -5,5 +5,6 @@
     "createAggregatedReport": "api/v1/aggregated_report",
     "updateAggregatedReport": "api/v1/aggregated_report",
     "graphQl": "api/graphql",
-    "auth": "auth/token"
+    "auth": "auth/token",
+    "authMe": "auth/users/me"
 }

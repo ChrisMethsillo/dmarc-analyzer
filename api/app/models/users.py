@@ -1,23 +1,39 @@
+    
+from pydantic import BaseModel, Field, EmailStr
 from beanie import Document
-from pydantic import BaseModel, EmailStr
 from typing import Optional
-from bson import ObjectId
 
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+class TokenData(BaseModel):
+    username: str | None = None
+    
 class User(Document):
+    username: str
     email: EmailStr
-    hashed_password: str
+    user_type: str
+    password: str
 
     class Settings:
         collection = "users"
 
 class UserCreate(BaseModel):
+    username: str
     email: EmailStr
+    user_type: str
     password: str
 
 class UserResponse(BaseModel):
-    id: str
+    username: str
     email: EmailStr
-
+    user_type: str
     @staticmethod
-    def from_user(user: User) -> "UserResponse":
-        return UserResponse(id=str(user.id), email=user.email)
+    def from_user(user: User):
+        return UserResponse(username=user.username, email=user.email, user_type=user.user_type)
+
+    
+    
+
+

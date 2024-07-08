@@ -1,9 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useAuth } from '@src/context/AuthContext'
 
 const Navbar = () => {
+  const { logout } = useAuth()
   return (
-    <nav className="bg-blue-900 p-4 shadow-lg sticky top-0 z-50">
+    <nav className="flex w-full bg-blue-900 p-4 shadow-lg sticky top-0 z-50">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-white text-lg font-bold">
           <Link to="/">DMARC Analyzer</Link>
@@ -15,9 +17,17 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/about" className="text-white hover:text-gray-300">
-              Log-out
+            <Link to="/reports" className="text-white hover:text-gray-300">
+              Reports
             </Link>
+          </li>
+          <li>
+            <p
+              onClick={() => logout()}
+              className="text-white hover:text-gray-300"
+            >
+              Logout
+            </p>
           </li>
         </ul>
       </div>

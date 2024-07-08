@@ -1,14 +1,16 @@
 import React, { createContext, useState, useContext, useEffect } from 'react'
 import { useNavigate, Outlet } from 'react-router-dom'
+import { fetchUserData } from '@src/hooks/auth'
 
 const AuthContext = createContext()
 
-export const AuthProvider = ({ children }) => {
+export const AuthProvider = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(
-    !!localStorage.getItem('token'),
+    !!localStorage.getItem('accessToken'),
   )
-  const [token, setToken] = useState(localStorage.getItem('token'))
+  const [token, setToken] = useState(localStorage.getItem('accessToken'))
   const [tokenType, setTokenType] = useState(localStorage.getItem('tokenType'))
+  const [userData, setUserData] = useState({})
   const navigate = useNavigate()
 
   const login = (newToken) => {
@@ -16,18 +18,28 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem('accessToken', access_token)
     localStorage.setItem('tokenType', token_type)
 
-    setToken(newToken)
+    setToken(access_token)
     setTokenType(token_type)
-
     setIsAuthenticated(true)
+
+    fetchUserData().then((data) => {
+      setUserData(data)
+    }).catch((error) => {
+      console.error('Error fetching user data:', error)
+      logout()
+    })
     navigate('/')
   }
 
   const logout = () => {
-    localStorage.removeItem('token')
+    localStorage.removeItem('accessToken')
+    localStorage.removeItem('tokenType')
+  
+
     setToken(null)
     setTokenType(null)
     setIsAuthenticated(false)
+    setUserData({})
     navigate('/login')
   }
 
@@ -38,11 +50,19 @@ export const AuthProvider = ({ children }) => {
       setToken(storedToken)
       setTokenType(storedTokenType)
       setIsAuthenticated(true)
+      fetchUserData().then((data) => {
+        setUserData(data)
+      }).catch((error) => {
+        console.error('Error fetching user data:', error)
+        logout()
+      })
     }
+
   }, [])
+
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, token, tokenType, login, logout }}
+      value={{ isAuthenticated, userData, login, logout }}
     >
       <Outlet />
     </AuthContext.Provider>

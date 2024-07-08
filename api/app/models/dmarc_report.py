@@ -59,9 +59,25 @@ class SPFAuthResultType(BaseModel):
     scope: Optional[str] = None
     result: str
 
-class AuthResultType(BaseModel):
-    dkim: Optional[DKIMAuthResultType] = None
-    spf: Optional[SPFAuthResultType] = None
+class AuthResultType(BaseModel):   
+    dkim: Optional[Union[DKIMAuthResultType, List[DKIMAuthResultType]]] = None
+    spf: Optional[Union[SPFAuthResultType, List[SPFAuthResultType]]] = None
+    
+    @validator('dkim', pre=True)
+    def ensure_reason_is_list(cls, v):
+        if v is None:
+            return v
+        if isinstance(v, list):
+            return v
+        return [v]
+    
+    @validator('spf', pre=True)
+    def ensure_reason_is_list(cls, v):
+        if v is None:
+            return v
+        if isinstance(v, list):
+            return v
+        return [v]
 
 class RecordType(BaseModel):
     row: RowType

@@ -1,27 +1,29 @@
-import React, { useState } from 'react';
-import { useAuth } from '@src/context/AuthContext';
-import { fetchLogin } from '@src/hooks/auth';
+import React, { useState } from 'react'
+import { useAuth } from '@src/context/AuthContext'
+import { fetchLogin } from '@src/hooks/auth'
 
 const Login = () => {
-  const { login } = useAuth();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const { login } = useAuth()
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    const { success, data } = await fetchLogin({ username, password });
+    event.preventDefault()
+    const { success, data } = await fetchLogin({ username, password })
     if (!success) {
-      setError('Invalid username or password');
-      return;
+      setError('Invalid username or password')
+      return
     }
-    login(data);
-  };
+    login(data)
+  }
 
   return (
     <div className="flex items-center justify-center min-h-screen">
       <div className="w-full max-w-xl p-8 space-y-6 bg-gray-700 rounded shadow-md">
-        <h1 className="text-2xl font-bold text-center text-white">DMARC Analyzer</h1>
+        <h1 className="text-2xl font-bold text-center text-white">
+          DMARC Analyzer
+        </h1>
         <form className="space-y-6" onSubmit={handleSubmit}>
           <label className="input input-bordered flex items-center gap-2">
             <svg
@@ -62,12 +64,28 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </label>
-          {error && 
-            <div role="alert" className="alert alert-error " onClick={()=>setError("")}>
-            <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-            <span>Invalid email or password</span>
-          </div>
-          }
+          {error && (
+            <div
+              role="alert"
+              className="alert alert-error "
+              onClick={() => setError('')}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="stroke-current shrink-0 h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              <span>Invalid email or password</span>
+            </div>
+          )}
           <button
             type="submit"
             className="w-full py-2 text-white bg-indigo-600 rounded hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -77,8 +95,7 @@ const Login = () => {
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Login;
-
+export default Login

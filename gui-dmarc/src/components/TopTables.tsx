@@ -26,7 +26,6 @@ export function TopDomainTable({ domainData, name }) {
   const [data, setData] = React.useState<DomainData[]>([])
 
   useEffect(() => {
-    console.log('domainData', domainData)
     if (!domainData) {
       return
     }

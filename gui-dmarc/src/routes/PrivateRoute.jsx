@@ -1,5 +1,5 @@
 import { useAuth } from '@src/context/AuthContext'
-import { Outlet, useNavigate } from 'react-router-dom'
+import { Navigate, Outlet, useNavigate } from 'react-router-dom'
 
 const PrivateRoute = () => {
   const { isAuthenticated } = useAuth()
@@ -7,7 +7,7 @@ const PrivateRoute = () => {
   if (!isAuthenticated) {
     navigate('/login')
   }
-  return <Outlet />
+  return isAuthenticated ? <Outlet /> : <Navigate to="/login" />
 }
 
 export default PrivateRoute

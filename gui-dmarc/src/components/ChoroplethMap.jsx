@@ -3,6 +3,7 @@ import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import axios from 'axios'
 import MapLegend from './MapLegend'
+import worldGeoJSON from '@src/assets/maps/world.geo.json'
 
 const fetchCountriesByIP = async (ips) => {
   const results = []
@@ -49,7 +50,7 @@ const ChoroplethMap = ({ ipData }) => {
       const chunks = []
 
       for (let i = 0; i < ipList.length; i += 100) {
-        chunks.push(ipList.slice(i, i + 100).map((ip) => ({ query: ip })))
+        chunks.push(ipList.slice(i, i + 100-1).map((ip) => ({ query: ip })))
       }
 
       const countryFrequency = {}
@@ -62,7 +63,6 @@ const ChoroplethMap = ({ ipData }) => {
         }
 
         const ipInfos = await fetchCountriesByIP([chunk])
-        requestsCount += 1
 
         ipInfos.forEach((info) => {
           if (info.status === 'success') {
@@ -75,13 +75,7 @@ const ChoroplethMap = ({ ipData }) => {
       setCountryData(countryFrequency)
     }
     getCountries()
-
-    const fetchGeoJsonData = async () => {
-      const response = await axios.get('src/assets/maps/world.geo.json')
-      setGeoJsonData(response.data)
-    }
-
-    fetchGeoJsonData()
+    setGeoJsonData(worldGeoJSON)
 
     return () => {
       if (mapInstance.current) {

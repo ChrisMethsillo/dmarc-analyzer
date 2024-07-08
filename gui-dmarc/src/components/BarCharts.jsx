@@ -18,7 +18,7 @@ const DMARCBarchart = ({ reports }) => {
     if (!reports) return
     const dataByDate = {}
     reports.forEach((report) => {
-      const dateBegin = new Date(report.date_begin)
+      const dateBegin = new Date(report.report_metadata.date_range.begin)
       const dateKey = `${String(dateBegin.getDate()).padStart(2, '0')}-${String(dateBegin.getMonth() + 1).padStart(2, '0')}-${dateBegin.getFullYear()}`
 
       if (!dataByDate[dateKey]) {

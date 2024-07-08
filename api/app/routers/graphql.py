@@ -1,6 +1,10 @@
-from fastapi import APIRouter
-from starlette_graphene3 import GraphQLApp, make_graphiql_handler
+from fastapi import APIRouter, Depends, HTTPException, status
+from strawberry.fastapi import GraphQLRouter
+from routers.auth import get_current_auth
 from schemas.dmarc_report import schema
 
+
 router = APIRouter()
-router.add_route("/graphql", GraphQLApp(schema=schema, on_get=make_graphiql_handler()), methods=["GET", "POST", "PUT", "DELETE"])
+graphql_app = GraphQLRouter(schema)
+
+router.include_router(graphql_app, prefix="/graphql")

@@ -1,11 +1,10 @@
-import axios from 'axios'
+import axiosInstance from './axiosInstance'
 import endpoints from './endpoints.json'
-const URL = import.meta.env.VITE_BACKEND_URL
 
 export async function fetchLogin({ username, password }) {
   try {
-    const response = await axios.post(
-      `${URL}/${endpoints.auth}`,
+    const response = await axiosInstance.post(
+      `/${endpoints.auth}`,
       new URLSearchParams({
         username,
         password,
@@ -18,7 +17,6 @@ export async function fetchLogin({ username, password }) {
     )
 
     if (response.status === 200 && response.data) {
-      console.log(response.data)
       return { success: true, data: response.data }
     }
   } catch (error) {
@@ -31,4 +29,9 @@ export async function fetchLogin({ username, password }) {
     }
     return { success: false, data: null, message: error.message }
   }
+}
+
+export async function fetchUserData() {
+  const response = await axiosInstance.get(`/${endpoints.authMe}`)
+  return response.data
 }

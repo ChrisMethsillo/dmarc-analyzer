@@ -8,5 +8,6 @@ class Settings(BaseModel):
     SECRET_KEY: str = config("SECRET_KEY")
     ALGORITHM : str = config("ALGORITHM", default="HS256")
     ACCESS_TOKEN_EXPIRE_MINUTES : int = config("ACCESS_TOKEN_EXPIRE_MINUTES", default=30, cast=int)
+    API_KEYS: list = config("API_KEYS", cast=lambda v: [k.strip() for k in v.split(",")])
 
 CONFIG = Settings()
