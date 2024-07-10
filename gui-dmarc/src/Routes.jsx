@@ -4,6 +4,7 @@ import Dashboard from './pages/Dashboard/Dashboard'
 import Layout from './pages/Navbar/Layout'
 import Reports from './pages/Reports/Reports'
 import Login from './pages/Login/Login'
+import NewUser from './pages/NewUser/NewUser'
 
 import { AuthProvider } from '@src/context/AuthContext'
 import PrivateRoute from '@src/routes/PrivateRoute'
@@ -20,6 +21,7 @@ function MyRoutes() {
               <Route path="/" element={<Dashboard />} />
               <Route path="/reports" element={<Reports />} />
               <Route path="/report/:id" element={<ReportData />} />
+              <Route path="/newuser" element={<NewUser />} />
             </Route>
           </Route>
         </Route>

@@ -10,6 +10,9 @@ function getDmarcReportsByDateRange(startDate, endDate) {
   })
 }
 
+function createNewUser(user) {
+  return axiosInstance.post(`/${endpoints.newUser}`, user)
+}
 function getDmarcReport(id) {
   return axiosInstance.get(`/${endpoints.aggregatedReport}/${id}`)
 }
@@ -139,4 +142,5 @@ export {
   getDmarcReport,
   getIpsByRange,
   getIdentifiersByDate,
+  createNewUser,
 }

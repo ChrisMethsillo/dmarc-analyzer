@@ -54,16 +54,16 @@ function Reports() {
   return (
     <div className="flex flex-col items-center p-5 h-screen">
       <h1 className="text-3xl font-bold">Reports by Date</h1>
-      <div className="flex flex-row gap-5 px-3 py-2 rounded-xl bg-gray-700 justify-between my-3">
+      <div className="flex flex-row gap-5 px-3 py-2 rounded-xl bg-blue-gray-700 justify-between my-3">
         <input
           type="date"
-          className="bg-gray-800 px-3 py-2 rounded-xl"
+          className="bg-blue-gray-800 px-3 py-2 rounded-xl"
           value={startDate.toISOString().split('T')[0]}
           onChange={handleStartDateChange}
         />
         <input
           type="date"
-          className="bg-gray-800 px-3 py-2 rounded-xl"
+          className="bg-blue-gray-800 px-3 py-2 rounded-xl"
           value={endDate.toISOString().split('T')[0]}
           onChange={handleEndDateChange}
         />
@@ -73,7 +73,7 @@ function Reports() {
           value={filters.reportId}
           onChange={handleFilterChange}
           placeholder="Report ID"
-          className="bg-gray-800 px-3 py-2 rounded-xl"
+          className="bg-blue-gray-800 px-3 py-2 rounded-xl"
         />
         <input
           type="text"
@@ -81,7 +81,7 @@ function Reports() {
           value={filters.orgName}
           onChange={handleFilterChange}
           placeholder="Organization Name"
-          className="bg-gray-800 px-3 py-2 rounded-xl"
+          className="bg-blue-gray-800 px-3 py-2 rounded-xl"
         />
         <input
           type="text"
@@ -89,7 +89,7 @@ function Reports() {
           value={filters.email}
           onChange={handleFilterChange}
           placeholder="Email"
-          className="bg-gray-800 px-3 py-2 rounded-xl"
+          className="bg-blue-gray-800 px-3 py-2 rounded-xl"
         />
       </div>
       <DmarcReportsTable reportsData={filteredReports} />

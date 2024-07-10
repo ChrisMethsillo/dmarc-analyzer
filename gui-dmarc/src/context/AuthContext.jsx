@@ -22,19 +22,20 @@ export const AuthProvider = () => {
     setTokenType(token_type)
     setIsAuthenticated(true)
 
-    fetchUserData().then((data) => {
-      setUserData(data)
-    }).catch((error) => {
-      console.error('Error fetching user data:', error)
-      logout()
-    })
+    fetchUserData()
+      .then((data) => {
+        setUserData(data)
+      })
+      .catch((error) => {
+        console.error('Error fetching user data:', error)
+        logout()
+      })
     navigate('/')
   }
 
   const logout = () => {
     localStorage.removeItem('accessToken')
     localStorage.removeItem('tokenType')
-  
 
     setToken(null)
     setTokenType(null)
@@ -50,20 +51,19 @@ export const AuthProvider = () => {
       setToken(storedToken)
       setTokenType(storedTokenType)
       setIsAuthenticated(true)
-      fetchUserData().then((data) => {
-        setUserData(data)
-      }).catch((error) => {
-        console.error('Error fetching user data:', error)
-        logout()
-      })
+      fetchUserData()
+        .then((data) => {
+          setUserData(data)
+        })
+        .catch((error) => {
+          console.error('Error fetching user data:', error)
+          logout()
+        })
     }
-
   }, [])
 
   return (
-    <AuthContext.Provider
-      value={{ isAuthenticated, userData, login, logout }}
-    >
+    <AuthContext.Provider value={{ isAuthenticated, userData, login, logout }}>
       <Outlet />
     </AuthContext.Provider>
   )

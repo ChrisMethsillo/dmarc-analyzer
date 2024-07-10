@@ -54,7 +54,7 @@ const DMARCBarchart = ({ reports }) => {
   }, [reports])
 
   return (
-    <div className="flex flex-col w-full items-center h-fit bg-gray-700 text-white p-5 rounded-md shadow-lg">
+    <div className="flex flex-col w-full items-center h-fit bg-blue-gray-700 text-white p-5 rounded-md shadow-lg">
       {chartData && (
         <Bar
           data={chartData}

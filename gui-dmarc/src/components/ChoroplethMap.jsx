@@ -50,7 +50,7 @@ const ChoroplethMap = ({ ipData }) => {
       const chunks = []
 
       for (let i = 0; i < ipList.length; i += 100) {
-        chunks.push(ipList.slice(i, i + 100-1).map((ip) => ({ query: ip })))
+        chunks.push(ipList.slice(i, i + 100 - 1).map((ip) => ({ query: ip })))
       }
 
       const countryFrequency = {}

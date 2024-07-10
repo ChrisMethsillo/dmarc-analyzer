@@ -17,10 +17,12 @@ export function LocalTable({
   data,
   columns,
   name,
+  onClick = (row) => {},
 }: {
   data: any[]
   columns: ColumnDef<any>[]
   name: string
+  onClick?: (row: any) => void
 }) {
   const [pagination, setPagination] = React.useState<PaginationState>({
     pageIndex: 0,
@@ -42,8 +44,8 @@ export function LocalTable({
   return (
     <div className="flex flex-col gap-1 w-full">
       <div className="flex overflow-x-auto pb-3">
-        <table className="min-w-full bg-gray-800 text-white divide-y divide-gray-200 rounded-xl">
-          <thead className="bg-gray-800 text-gray-200 overflow-x-auto">
+        <table className="min-w-full bg-blue-gray-800 text-white divide-y divide-gray-200 rounded-xl">
+          <thead className="bg-blue-gray-800 text-gray-200 overflow-x-auto">
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
@@ -108,9 +110,15 @@ export function LocalTable({
               ))}
             </tr>
           </thead>
-          <tbody className="bg-gray-700 divide-y divide-gray-500">
+          <tbody className="bg-blue-gray-700 divide-y divide-gray-500">
             {table.getRowModel().rows.map((row) => (
-              <tr key={row.id} className="bg-gray-700 hover:bg-gray-600">
+              <tr
+                key={row.id}
+                className="bg-blue-gray-700 hover:bg-blue-gray-600 cursor-pointer"
+                onClick={() => {
+                  onClick(row)
+                }}
+              >
                 {row.getVisibleCells().map((cell) => (
                   <td
                     key={cell.id}
@@ -125,17 +133,17 @@ export function LocalTable({
         </table>
       </div>
       {/* Pagination */}
-      <div className="bg-gray-700 py-3 px-2 flex justify-between rounded-xl">
+      <div className="bg-blue-gray-700 py-3 px-2 flex justify-between rounded-xl">
         <div className="flex gap-2 align-center items-center w-full ">
           <button
-            className="rounded-xl px-5 text-gray-100 font-bold bg-gray-500"
+            className="rounded-xl px-5 text-gray-100 font-bold bg-blue-gray-500"
             onClick={() => table.setPageIndex(0)}
             disabled={!table.getCanPreviousPage()}
           >
             {'<<'}
           </button>
           <button
-            className="rounded-xl px-5 text-gray-100 font-bold bg-gray-500"
+            className="rounded-xl px-5 text-gray-100 font-bold bg-blue-gray-500"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
@@ -149,14 +157,14 @@ export function LocalTable({
             </strong>
           </div>
           <button
-            className="rounded-xl px-5 text-gray-100 font-bold bg-gray-500"
+            className="rounded-xl px-5 text-gray-100 font-bold bg-blue-gray-500"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
             {'>'}
           </button>
           <button
-            className="rounded-xl px-5 text-gray-100 font-bold bg-gray-500"
+            className="rounded-xl px-5 text-gray-100 font-bold bg-blue-gray-500"
             onClick={() => table.setPageIndex(table.getPageCount() - 1)}
             disabled={!table.getCanNextPage()}
           >
@@ -170,7 +178,7 @@ export function LocalTable({
             onChange={(e) => {
               table.setPageSize(Number(e.target.value))
             }}
-            className="rounded-xl py-1 px-5 text-gray-100 font-bold bg-gray-500"
+            className="rounded-xl py-1 px-5 text-gray-100 font-bold bg-blue-gray-500"
           >
             {[5, 10, 15, 30, 40, 50].map((pageSize) => (
               <option key={pageSize} value={pageSize}>
@@ -210,7 +218,7 @@ export function Filter({
               ])
             }
             placeholder={`Min`}
-            className="w-20 px-2 py-1 text-gray-300 bg-gray-800 border rounded focus:outline-none focus:ring focus:ring-blue-300"
+            className="w-20 px-2 py-1 text-gray-300 bg-blue-gray-800 border rounded focus:outline-none focus:ring focus:ring-blue-300"
           />
         </div>
       ) : firstValue instanceof Date ||
@@ -221,7 +229,7 @@ export function Filter({
           value={(columnFilterValue ?? '') as string}
           onChange={(e) => column.setFilterValue(e.target.value)}
           placeholder={`Search...`}
-          className="w-36 px-2 py-1 text-gray-300 bg-gray-800 border rounded focus:outline-none focus:ring focus:ring-blue-300"
+          className="w-36 px-2 py-1 text-gray-300 bg-blue-gray-800 border rounded focus:outline-none focus:ring focus:ring-blue-300"
           aria-label="search"
         />
       )}
@@ -232,7 +240,7 @@ export function Filter({
 export function LocalSimpleTable({
   data,
   columns,
-  pageSize=5,
+  pageSize = 5,
 }: {
   data: any[]
   columns: ColumnDef<any>[]
@@ -258,8 +266,8 @@ export function LocalSimpleTable({
   return (
     <div className="flex flex-col gap-1 max-w-full">
       <div className="flex rounded-xl max-w-full overflow-x-auto pb-3">
-        <table className="bg-gray-800 text-white divide-gray-200">
-          <thead className="bg-gray-800 text-gray-200 overflow-x-auto">
+        <table className="bg-blue-gray-800 text-white divide-gray-200">
+          <thead className="bg-blue-gray-800 text-gray-200 overflow-x-auto">
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
@@ -301,9 +309,12 @@ export function LocalSimpleTable({
               </tr>
             ))}
           </thead>
-          <tbody className="bg-gray-700 divide-y divide-gray-500">
+          <tbody className="bg-blue-gray-700 divide-y divide-gray-500">
             {table.getRowModel().rows.map((row) => (
-              <tr key={row.id} className="bg-gray-700 hover:bg-gray-600">
+              <tr
+                key={row.id}
+                className="bg-blue-gray-700 hover:bg-blue-gray-600"
+              >
                 {row.getVisibleCells().map((cell) => (
                   <td
                     key={cell.id}
@@ -318,17 +329,17 @@ export function LocalSimpleTable({
         </table>
       </div>
       {/* Pagination */}
-      <div className="bg-gray-700 py-3 px-2 flex justify-between rounded-xl">
+      <div className="bg-blue-gray-700 py-3 px-2 flex justify-between rounded-xl">
         <div className="flex gap-2 align-center items-center w-full ">
           <button
-            className="rounded-xl px-5 text-gray-100 font-bold bg-gray-500"
+            className="rounded-xl px-5 text-gray-100 font-bold bg-blue-gray-500"
             onClick={() => table.setPageIndex(0)}
             disabled={!table.getCanPreviousPage()}
           >
             {'<<'}
           </button>
           <button
-            className="rounded-xl px-5 text-gray-100 font-bold bg-gray-500"
+            className="rounded-xl px-5 text-gray-100 font-bold bg-blue-gray-500"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
@@ -342,14 +353,14 @@ export function LocalSimpleTable({
             </strong>
           </div>
           <button
-            className="rounded-xl px-5 text-gray-100 font-bold bg-gray-500"
+            className="rounded-xl px-5 text-gray-100 font-bold bg-blue-gray-500"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
             {'>'}
           </button>
           <button
-            className="rounded-xl px-5 text-gray-100 font-bold bg-gray-500"
+            className="rounded-xl px-5 text-gray-100 font-bold bg-blue-gray-500"
             onClick={() => table.setPageIndex(table.getPageCount() - 1)}
             disabled={!table.getCanNextPage()}
           >
@@ -363,7 +374,7 @@ export function LocalSimpleTable({
             onChange={(e) => {
               table.setPageSize(Number(e.target.value))
             }}
-            className="rounded-xl py-1 px-5 text-gray-100 font-bold bg-gray-500"
+            className="rounded-xl py-1 px-5 text-gray-100 font-bold bg-blue-gray-500"
           >
             {[5, 10, 15, 30, 40, 50].map((pageSize) => (
               <option key={pageSize} value={pageSize}>

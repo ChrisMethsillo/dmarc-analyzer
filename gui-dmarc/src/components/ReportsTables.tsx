@@ -93,6 +93,7 @@ type DmarcReport = {
 
 export function DmarcReportsTable({
   reportsData,
+  pageSize = 10,
 }: {
   reportsData: DmarcReport[]
 }) {
@@ -245,7 +246,7 @@ export function DmarcReportsTable({
         data={reportsData}
         columns={columns}
         name={'DMARC Reports'}
-        pageSize={10}
+        pageSize={pageSize}
       />
     </div>
   )
@@ -292,55 +293,117 @@ export function RecordsTable({ recordsData }: { recordsData: RecordType[] }) {
       {
         header: 'SPF Auth Domain',
         accessorFn: (record) => {
-          if (record.auth_results?.spf && Array.isArray(record.auth_results.spf)) {
-            return record.auth_results.spf.map((result) => result.domain).join(', ');
+          if (
+            record.auth_results?.spf &&
+            Array.isArray(record.auth_results.spf)
+          ) {
+            return record.auth_results.spf
+              .map((result) => result.domain)
+              .join(', ')
+          } else if (
+            record.auth_results?.spf &&
+            !Array.isArray(record.auth_results.spf)
+          ) {
+            return record.auth_results.spf.domain
           }
-          return '';
-        }
+          return ''
+        },
       },
       {
         header: 'SPF Auth Scope',
         accessorFn: (record) => {
-          if (record.auth_results?.spf && Array.isArray(record.auth_results.spf)) {
-            return record.auth_results.spf.map((result) => result.scope).join(', ');
+          if (
+            record.auth_results?.spf &&
+            Array.isArray(record.auth_results.spf)
+          ) {
+            return record.auth_results.spf
+              .map((result) => result.scope)
+              .join(', ')
+          } else if (
+            record.auth_results?.spf &&
+            !Array.isArray(record.auth_results.spf)
+          ) {
+            return record.auth_results.spf.scope
           }
-          return '';
-        }
+          return ''
+        },
       },
       {
         header: 'SPF Auth Result',
         accessorFn: (record) => {
-          if (record.auth_results?.spf && Array.isArray(record.auth_results.spf)) {
-            return record.auth_results.spf.map((result) => result.result).join(', ');
+          if (
+            record.auth_results?.spf &&
+            Array.isArray(record.auth_results.spf)
+          ) {
+            return record.auth_results.spf
+              .map((result) => result.result)
+              .join(', ')
+          } else if (
+            record.auth_results?.spf &&
+            !Array.isArray(record.auth_results.spf)
+          ) {
+            return record.auth_results.spf.result
           }
-          return '';
-        }
+
+          return ''
+        },
       },
       {
         header: 'DKIM Auth Domain',
         accessorFn: (record) => {
-          if (record.auth_results?.dkim && Array.isArray(record.auth_results.dkim)) {
-            return record.auth_results.dkim.map((result) => result.domain).join(', ');
+          if (
+            record.auth_results?.dkim &&
+            Array.isArray(record.auth_results.dkim)
+          ) {
+            return record.auth_results.dkim
+              .map((result) => result.domain)
+              .join(', ')
+          } else if (
+            record.auth_results?.dkim &&
+            !Array.isArray(record.auth_results.dkim)
+          ) {
+            return record.auth_results.dkim.domain
           }
-          return '';
+
+          return ''
         },
       },
       {
         header: 'DKIM Auth Selector',
         accessorFn: (record) => {
-          if (record.auth_results?.dkim && Array.isArray(record.auth_results.dkim)) {
-            return record.auth_results.dkim.map((result) => result.selector).join(', ');
+          if (
+            record.auth_results?.dkim &&
+            Array.isArray(record.auth_results.dkim)
+          ) {
+            return record.auth_results.dkim
+              .map((result) => result.selector)
+              .join(', ')
+          } else if (
+            record.auth_results?.dkim &&
+            !Array.isArray(record.auth_results.dkim)
+          ) {
+            return record.auth_results.dkim.selector
           }
-          return '';
+          return ''
         },
       },
       {
         header: 'DKIM Auth Result',
         accessorFn: (record) => {
-          if (record.auth_results?.dkim && Array.isArray(record.auth_results.dkim)) {
-            return record.auth_results.dkim.map((result) => result.result).join(', ');
+          if (
+            record.auth_results?.dkim &&
+            Array.isArray(record.auth_results.dkim)
+          ) {
+            return record.auth_results.dkim
+              .map((result) => result.result)
+              .join(', ')
+          } else if (
+            record.auth_results?.dkim &&
+            !Array.isArray(record.auth_results.dkim)
+          ) {
+            return record.auth_results.dkim.result
           }
-          return '';
+          return ''
         },
       },
     ],

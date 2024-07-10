@@ -20,7 +20,7 @@ const Login = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen">
-      <div className="w-full max-w-xl p-8 space-y-6 bg-gray-700 rounded shadow-md">
+      <div className="w-full max-w-xl p-8 space-y-6 bg-blue-gray-700 rounded shadow-md">
         <h1 className="text-2xl font-bold text-center text-white">
           DMARC Analyzer
         </h1>
@@ -88,7 +88,7 @@ const Login = () => {
           )}
           <button
             type="submit"
-            className="w-full py-2 text-white bg-indigo-600 rounded hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="w-full py-2 text-white bg-blue-gray-600 rounded hover:bg-blue-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             Login
           </button>

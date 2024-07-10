@@ -6,5 +6,6 @@
     "updateAggregatedReport": "api/v1/aggregated_report",
     "graphQl": "api/graphql",
     "auth": "auth/token",
-    "authMe": "auth/users/me"
+    "authMe": "auth/users/me",
+    "newUser": "auth/register"
 }

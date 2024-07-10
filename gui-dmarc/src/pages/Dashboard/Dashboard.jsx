@@ -86,18 +86,18 @@ function Dashboard() {
   return (
     <div className="flex flex-col px-6 md:px-40 py-6 items-start gap-5 justify-between w-screen">
       <h1 className="font-bold text-4xl">Dashboard</h1>
-      <div className="flex rounded-xl shadow-xl px-3 py-2 w-full bg-gray-700 gap-5">
+      <div className="flex rounded-xl shadow-xl px-3 py-2 w-full bg-blue-gray-700 gap-5">
         <div className="flex flex-row items-center gap-5 justify-between">
           <label className="font-bold">Select Date Range:</label>
           <input
             type="date"
-            className="bg-gray-800 px-3 py-2 rounded-xl"
+            className="bg-blue-gray-800 px-3 py-2 rounded-xl"
             value={startDate.toISOString().split('T')[0]}
             onChange={handleStartDateChange}
           />
           <input
             type="date"
-            className="bg-gray-800 px-3 py-2 rounded-xl"
+            className="bg-blue-gray-800 px-3 py-2 rounded-xl"
             value={endDate.toISOString().split('T')[0]}
             onChange={handleEndDateChange}
           />
@@ -124,7 +124,7 @@ function Dashboard() {
           </div>
         </div>
       </div>
-      <div className="flex justify-between bg-gray-700 w-full px-3 py-2 rounded-xl">
+      <div className="flex justify-between bg-blue-gray-700 w-full px-3 py-2 rounded-xl">
         <a href="#policy" className="btn btn-md text-gray-100">
           Policy Evaluated
         </a>
@@ -138,19 +138,27 @@ function Dashboard() {
           <h1 className="text-2xl font-semibold mb-2">
             Top Envelope From Domains
           </h1>
-          <TopDomainTable domainData={identifiers.envelopeFrom} />
+          <TopDomainTable
+            domainData={identifiers.envelopeFrom}
+            name={'envelope_from'}
+            reports={reports}
+          />
         </div>
         <div className="flex flex-col w-full mb-4">
           <h1 className="text-2xl font-semibold mb-2">
             Top Envelope To Domains
           </h1>
-          <TopDomainTable domainData={identifiers.envelopeTo} />
+          <TopDomainTable
+            domainData={identifiers.envelopeTo}
+            name={'envelope_to'}
+            reports={reports}
+          />
         </div>
       </div>
       <div className="flex flex-col md:flex-row w-full gap-2">
         <div className="flex flex-col w-3/5">
           <h2 className="text-xl font-bold mb-4">
-            Results of DMARC Reports by Date
+            Results of DMARC Disposition Results by Date
           </h2>
           <DMARCBarchart reports={reports} />
         </div>
