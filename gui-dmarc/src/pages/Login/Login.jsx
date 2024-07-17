@@ -25,7 +25,7 @@ const Login = () => {
           DMARC Analyzer
         </h1>
         <form className="space-y-6" onSubmit={handleSubmit}>
-          <label className="input input-bordered flex items-center gap-2">
+          <label className="input bg-gray-800 input-bordered flex items-center gap-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
@@ -37,13 +37,13 @@ const Login = () => {
             </svg>
             <input
               type="text"
-              className="grow bg-transparent border-b-2 border-gray-300 text-white focus:outline-none focus:ring-0 focus:border-indigo-500"
-              placeholder="Email"
+              className="grow bg-gray-800 border-b-2 border-gray-300 text-white focus:outline-none focus:ring-0 focus:border-indigo-500"
+              placeholder="Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
           </label>
-          <label className="input input-bordered flex items-center gap-2">
+          <label className="input bg-gray-800 input-bordered flex items-center gap-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"

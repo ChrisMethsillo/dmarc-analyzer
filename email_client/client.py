@@ -66,5 +66,6 @@ if __name__ == "__main__":
     if not os.path.exists(parsed_dir):
         os.makedirs(parsed_dir)
             
-    watch_emails()
+    # watch_emails()
+    parse_dmarc_files()
     

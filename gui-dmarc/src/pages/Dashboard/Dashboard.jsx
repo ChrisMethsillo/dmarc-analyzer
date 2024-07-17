@@ -125,12 +125,18 @@ function Dashboard() {
         </div>
       </div>
       <div className="flex justify-between bg-blue-gray-700 w-full px-3 py-2 rounded-xl">
-        <a href="#policy" className="btn btn-md text-gray-100">
-          Policy Evaluated
-        </a>
-        <a href="#auth" className="btn btn-md text-gray-100">
-          Auth results
-        </a>
+      <button
+        onClick={() => window.location.href = "#policy"}
+        className="bg-blue-gray-900 py-3 px-6 rounded-xl text-gray-100"
+      >
+        Policy Evaluated
+      </button>
+      <button
+        onClick={() => window.location.href = "#auth"}
+        className="bg-blue-gray-900 px-6 rounded-xl text-gray-100"
+      >
+        Auth results
+      </button>
       </div>
 
       <div className="flex flex-col md:flex-row w-full gap-5">
